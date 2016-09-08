@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  KYBaseNavigationController.h
 //  KYVedioPlayer
 //
 //  Created by kingly on 16/9/8.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : KYBaseViewController
-
+@interface KYBaseNavigationController : UINavigationController
 
 @end
-

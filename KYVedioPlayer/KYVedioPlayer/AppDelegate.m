@@ -7,10 +7,13 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
 @import AVFoundation;
 
-@interface AppDelegate ()
+@interface AppDelegate (){
 
+    ViewController *_viewController;
+}
 @end
 
 @implementation AppDelegate
@@ -19,6 +22,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
     //设置音频会话
     NSError *categoryError = nil;
     NSError *activeError  = nil;
@@ -26,6 +33,11 @@
     [session setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:&categoryError];
     [session setActive:YES error:&activeError];
     
+    //设置window根视图
+    _viewController  =  [[ViewController alloc] init];
+    KYBaseNavigationController *navigationController = [[KYBaseNavigationController alloc] initWithRootViewController:_viewController];
+    self.window.rootViewController = navigationController;
+
     
     return YES;
 }

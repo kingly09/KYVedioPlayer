@@ -1,0 +1,17 @@
+//
+//  KYVedioPlayer_PrefixHeader.pch
+//  KYVedioPlayer
+//
+//  Created by kingly on 16/9/8.
+//  Copyright © 2016年 https://github.com/kingly09/KYVedioPlayer kingly  inc . All rights reserved.
+//
+
+#ifndef KYVedioPlayer_PrefixHeader_pch
+#define KYVedioPlayer_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "KYBaseNavigationController.h"
+#import "KYBaseViewController.h"
+
+#endif /* KYVedioPlayer_PrefixHeader_pch */
