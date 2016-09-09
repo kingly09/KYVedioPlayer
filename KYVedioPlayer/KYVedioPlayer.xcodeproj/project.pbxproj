@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC22D6401D826440007F040A /* KYNetworkVideoCellPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D63F1D826440007F040A /* KYNetworkVideoCellPlayVC.m */; };
+		BC22D6431D8264C3007F040A /* KYLocalVideoPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D6421D8264C3007F040A /* KYLocalVideoPlayVC.m */; };
+		BC22D6461D826504007F040A /* KYRememberLastPlayedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D6451D826504007F040A /* KYRememberLastPlayedVC.m */; };
+		BC22D6491D826548007F040A /* KYSwitchFreelyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D6481D826548007F040A /* KYSwitchFreelyVC.m */; };
 		BC4CE87B1D815D8D00E6475C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE87A1D815D8D00E6475C /* main.m */; };
 		BC4CE87E1D815D8D00E6475C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE87D1D815D8D00E6475C /* AppDelegate.m */; };
 		BC4CE8811D815D8D00E6475C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE8801D815D8D00E6475C /* ViewController.m */; };
@@ -38,6 +42,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BC22D63E1D826440007F040A /* KYNetworkVideoCellPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYNetworkVideoCellPlayVC.h; sourceTree = "<group>"; };
+		BC22D63F1D826440007F040A /* KYNetworkVideoCellPlayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYNetworkVideoCellPlayVC.m; sourceTree = "<group>"; };
+		BC22D6411D8264C3007F040A /* KYLocalVideoPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYLocalVideoPlayVC.h; sourceTree = "<group>"; };
+		BC22D6421D8264C3007F040A /* KYLocalVideoPlayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYLocalVideoPlayVC.m; sourceTree = "<group>"; };
+		BC22D6441D826504007F040A /* KYRememberLastPlayedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYRememberLastPlayedVC.h; sourceTree = "<group>"; };
+		BC22D6451D826504007F040A /* KYRememberLastPlayedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYRememberLastPlayedVC.m; sourceTree = "<group>"; };
+		BC22D6471D826548007F040A /* KYSwitchFreelyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYSwitchFreelyVC.h; sourceTree = "<group>"; };
+		BC22D6481D826548007F040A /* KYSwitchFreelyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYSwitchFreelyVC.m; sourceTree = "<group>"; };
 		BC4CE8761D815D8D00E6475C /* KYVedioPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KYVedioPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC4CE87A1D815D8D00E6475C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BC4CE87C1D815D8D00E6475C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -87,6 +99,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC22D63D1D82600B007F040A /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TableViewCell;
+			sourceTree = "<group>";
+		};
 		BC4CE86D1D815D8D00E6475C = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +132,7 @@
 				BC4CE87C1D815D8D00E6475C /* AppDelegate.h */,
 				BC4CE87D1D815D8D00E6475C /* AppDelegate.m */,
 				BC4CE8BA1D8163D500E6475C /* KYVedioPlayer_PrefixHeader.pch */,
+				BC22D63D1D82600B007F040A /* TableViewCell */,
 				BC4CE8B31D8161CF00E6475C /* BaseNavigationController */,
 				BC4CE8AF1D81615200E6475C /* ViewControllers */,
 				BC4CE8881D815D8D00E6475C /* Assets.xcassets */,
@@ -157,7 +177,15 @@
 				BC4CE8B81D81638200E6475C /* KYBaseViewController.m */,
 				BC4CE87F1D815D8D00E6475C /* ViewController.h */,
 				BC4CE8801D815D8D00E6475C /* ViewController.m */,
+				BC22D6471D826548007F040A /* KYSwitchFreelyVC.h */,
+				BC22D6481D826548007F040A /* KYSwitchFreelyVC.m */,
+				BC22D6441D826504007F040A /* KYRememberLastPlayedVC.h */,
+				BC22D6451D826504007F040A /* KYRememberLastPlayedVC.m */,
 				BC4CE8821D815D8D00E6475C /* Main.storyboard */,
+				BC22D63E1D826440007F040A /* KYNetworkVideoCellPlayVC.h */,
+				BC22D63F1D826440007F040A /* KYNetworkVideoCellPlayVC.m */,
+				BC22D6411D8264C3007F040A /* KYLocalVideoPlayVC.h */,
+				BC22D6421D8264C3007F040A /* KYLocalVideoPlayVC.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -304,7 +332,11 @@
 			files = (
 				BC4CE8B61D8161F500E6475C /* KYBaseNavigationController.m in Sources */,
 				BC4CE8B91D81638200E6475C /* KYBaseViewController.m in Sources */,
+				BC22D6461D826504007F040A /* KYRememberLastPlayedVC.m in Sources */,
+				BC22D6401D826440007F040A /* KYNetworkVideoCellPlayVC.m in Sources */,
 				BC4CE8811D815D8D00E6475C /* ViewController.m in Sources */,
+				BC22D6491D826548007F040A /* KYSwitchFreelyVC.m in Sources */,
+				BC22D6431D8264C3007F040A /* KYLocalVideoPlayVC.m in Sources */,
 				BC4CE87E1D815D8D00E6475C /* AppDelegate.m in Sources */,
 				BC4CE8871D815D8D00E6475C /* KYVedioPlayer.xcdatamodeld in Sources */,
 				BC4CE87B1D815D8D00E6475C /* main.m in Sources */,
@@ -535,6 +567,7 @@
 				BC4CE8A81D815D8E00E6475C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BC4CE8A91D815D8E00E6475C /* Build configuration list for PBXNativeTarget "KYVedioPlayerTests" */ = {
 			isa = XCConfigurationList;
@@ -543,6 +576,7 @@
 				BC4CE8AB1D815D8E00E6475C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BC4CE8AC1D815D8E00E6475C /* Build configuration list for PBXNativeTarget "KYVedioPlayerUITests" */ = {
 			isa = XCConfigurationList;
@@ -551,6 +585,7 @@
 				BC4CE8AE1D815D8E00E6475C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
