@@ -27,7 +27,11 @@
     vedioPlayer = [[KYVedioPlayer alloc]initWithFrame:playerFrame];
     vedioPlayer.delegate = self;
     
-    vedioPlayer.URLString = self.URLString;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"mp4"];
+    
+    NSLog(@"path::%@",path);
+    
+    vedioPlayer.URLString = @"http://7rfkz6.com1.z0.glb.clouddn.com/480p_20150528_nubiaz9.mp4";
     vedioPlayer.titleLabel.text = self.title;
     vedioPlayer.closeBtn.hidden = NO;
     [self.view addSubview:vedioPlayer];
@@ -108,11 +112,11 @@
 
 ///播放状态
 //播放失败的代理方法
--(void)kyvedioPlayerFailedPlay:(KYVedioPlayer *)kyvedioPlayer WMPlayerStatus:(KYVedioPlayerState)state{
+-(void)kyvedioPlayerFailedPlay:(KYVedioPlayer *)kyvedioPlayer playerStatus:(KYVedioPlayerState)state{
     NSLog(@"[KYVedioPlayer] kyvedioPlayerFailedPlay  播放失败");
 }
 //准备播放的代理方法
--(void)kyvedioPlayerReadyToPlay:(KYVedioPlayer *)kyvedioPlayer WMPlayerStatus:(KYVedioPlayerState)state{
+-(void)kyvedioPlayerReadyToPlay:(KYVedioPlayer *)kyvedioPlayer playerStatus:(KYVedioPlayerState)state{
 
     NSLog(@"[KYVedioPlayer] kyvedioPlayerReadyToPlay  准备播放");
 }

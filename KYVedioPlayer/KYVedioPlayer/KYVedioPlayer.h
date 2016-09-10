@@ -44,9 +44,9 @@ typedef NS_ENUM(NSInteger, CloseBtnStyle){
 
 ///播放状态
 //播放失败的代理方法
--(void)kyvedioPlayerFailedPlay:(KYVedioPlayer *)kyvedioPlayer WMPlayerStatus:(KYVedioPlayerState)state;
+-(void)kyvedioPlayerFailedPlay:(KYVedioPlayer *)kyvedioPlayer playerStatus:(KYVedioPlayerState)state;
 //准备播放的代理方法
--(void)kyvedioPlayerReadyToPlay:(KYVedioPlayer *)kyvedioPlayer WMPlayerStatus:(KYVedioPlayerState)state;
+-(void)kyvedioPlayerReadyToPlay:(KYVedioPlayer *)kyvedioPlayer playerStatus:(KYVedioPlayerState)state;
 //播放完毕的代理方法
 -(void)kyplayerFinishedPlay:(KYVedioPlayer *)kyvedioPlayer;
 
