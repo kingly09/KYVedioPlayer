@@ -53,35 +53,36 @@
     if (_dataSource) {
         return _dataSource;
     }
+    NSString *path3gp = [[NSBundle mainBundle] pathForResource:@"贝加尔湖畔" ofType:@"3gp"];
     NSArray *arr = @[
                     
-                    @{@"title":@"视频一",
+                    @{@"title":@"视频一 mp4 格式",
                       @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
                       @"video":@"http://7rfkz6.com1.z0.glb.clouddn.com/480p_20160229_T2.mp4"},
                     
-                    @{@"title":@"视频二",
+                    @{@"title":@"视频二 m3u8格式",
                       @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
-                      @"video":@"http://7rfkz6.com1.z0.glb.clouddn.com/%20480p_160111_Remixmini.mp4"},
+                      @"video":@"http://flv2.bn.netease.com/videolib3/1609/10/QElkL2832/SD/movie_index.m3u8"},
                     
-                    @{@"title":@"视频三",
+                    @{@"title":@"视频三 mov格式",
                       @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
-                      @"video":@"http://7rfkz6.com1.z0.glb.clouddn.com/480p_150930_iPhone6s.mp4"},
+                      @"video":@"http://movies.apple.com/media/us/iphone/2010/tours/apple-iphone4-design_video-us-20100607_848x480.mov"},
                     
-                    @{@"title":@"视频四",
+                    @{@"title":@"视频四 3gp",
                       @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
-                      @"video":@"http://7rfkz6.com1.z0.glb.clouddn.com/480p_150902_jianguoshouji.mp4"},
+                      @"video":path3gp},
                     
                     @{@"title":@"视频五",
-                      @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
-                      @"video":@"http://7rfkz6.com1.z0.glb.clouddn.com/480p_150814_oneplus2.mp4"},
+                      @"image":@"http://vimg3.ws.126.net/image/snapshot/2016/9/V/A/VBVM8HAVA.jpg",
+                      @"video":@"http://flv2.bn.netease.com/videolib3/1609/05/shRkL5482/HD/movie_index.m3u8"},
                     
                     @{@"title":@"视频六",
                       @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
-                      @"video":@"http://5069.vod.myqcloud.com/5069_492c1d36d8d111e58e6e3b72aa110d6e.f20.mp4"},
+                      @"video":@"http://flv2.bn.netease.com/videolib3/1609/10/KMEzY9667/SD/KMEzY9667-mobile.mp4"},
                     
                     @{@"title":@"视频七",
-                      @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
-                      @"video":@"http://7rfkz6.com1.z0.glb.clouddn.com/480p_20150528_nubiaz9.mp4"},
+                      @"image":@"http://vimg3.ws.126.net/image/snapshot/2016/9/O/J/VBVMCCMOJ.jpg",
+                      @"video":@"http://flv2.bn.netease.com/tvmrepo/2016/9/R/9/EBVLTSCR9/SD/movie_index.m3u8"},
                     
                     ];
     

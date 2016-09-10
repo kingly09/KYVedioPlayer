@@ -26,6 +26,7 @@
 		BC4CE8B91D81638200E6475C /* KYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE8B81D81638200E6475C /* KYBaseViewController.m */; };
 		BCD8E9721D83E54D00EC2F04 /* test.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = BCD8E9711D83E54D00EC2F04 /* test.mp4 */; };
 		BCD8E9761D83F04100EC2F04 /* KYVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD8E9751D83F04100EC2F04 /* KYVideo.m */; };
+		BCD8E9781D84011D00EC2F04 /* 贝加尔湖畔.3gp in Resources */ = {isa = PBXBuildFile; fileRef = BCD8E9771D84011D00EC2F04 /* 贝加尔湖畔.3gp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		BCD8E9711D83E54D00EC2F04 /* test.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.mp4; sourceTree = "<group>"; };
 		BCD8E9741D83F04100EC2F04 /* KYVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYVideo.h; sourceTree = "<group>"; };
 		BCD8E9751D83F04100EC2F04 /* KYVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYVideo.m; sourceTree = "<group>"; };
+		BCD8E9771D84011D00EC2F04 /* 贝加尔湖畔.3gp */ = {isa = PBXFileReference; lastKnownFileType = file; path = "贝加尔湖畔.3gp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 				BC4CE8AF1D81615200E6475C /* ViewControllers */,
 				BC4CE8881D815D8D00E6475C /* Assets.xcassets */,
 				BC4CE88A1D815D8D00E6475C /* LaunchScreen.storyboard */,
+				BCD8E9771D84011D00EC2F04 /* 贝加尔湖畔.3gp */,
 				BCD8E9711D83E54D00EC2F04 /* test.mp4 */,
 				BC4CE88D1D815D8D00E6475C /* Info.plist */,
 				BC4CE8851D815D8D00E6475C /* KYVedioPlayer.xcdatamodeld */,
@@ -354,6 +357,7 @@
 				BC4CE88C1D815D8D00E6475C /* LaunchScreen.storyboard in Resources */,
 				BC4CE8891D815D8D00E6475C /* Assets.xcassets in Resources */,
 				BC4CE8841D815D8D00E6475C /* Main.storyboard in Resources */,
+				BCD8E9781D84011D00EC2F04 /* 贝加尔湖畔.3gp in Resources */,
 				BCD8E9721D83E54D00EC2F04 /* test.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
