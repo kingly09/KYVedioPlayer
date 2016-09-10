@@ -10,5 +10,6 @@
 
 @interface KYLocalVideoPlayVC : KYBaseViewController
 
+@property (nonatomic, retain) NSString * URLString;
 
 @end

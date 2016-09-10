@@ -82,7 +82,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     
     self.seekTime = 0.00;
     self.isAutoDismissBottomView = YES;  //自动隐藏
-    self.backgroundColor = [UIColor blackColor];
+    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"PlayerBackground"]];
     
     //添加loading视图
     self.loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];

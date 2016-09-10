@@ -28,7 +28,10 @@
     vedioPlayer.delegate = self;
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"mp4"];
-    vedioPlayer.URLString = path;
+    if (_URLString == nil) {
+        _URLString  = path;
+    }
+    vedioPlayer.URLString = _URLString;
     vedioPlayer.titleLabel.text = self.title;
     vedioPlayer.closeBtn.hidden = NO;
     vedioPlayer.progressColor = [UIColor orangeColor];
