@@ -81,7 +81,9 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 -(void)initPlayer{
     
     self.seekTime = 0.00;
+    self.isAutoDismissBottomView = YES;  //自动隐藏
     self.backgroundColor = [UIColor blackColor];
+    
     //添加loading视图
     self.loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [self addSubview:self.loadingView];
@@ -143,7 +145,6 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     self.progressSlider = [[UISlider alloc]init];
     self.progressSlider.minimumValue = 0.0;
     [self.progressSlider setThumbImage:[UIImage imageNamed:@"ic_dot"] ?: [UIImage imageNamed:@"ic_dot"]  forState:UIControlStateNormal];
-    self.progressSlider.minimumTrackTintColor = [UIColor greenColor];
     self.progressSlider.maximumTrackTintColor = [UIColor clearColor];
     self.progressSlider.value = 0.0;//指定初始值
     //进度条的拖拽事件
@@ -350,6 +351,19 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     }
 }
 /**
+ * 设置进度条的颜色
+ **/
+-(void)setProgressColor:(UIColor *)progressColor{
+
+    if (progressColor == nil) {
+        
+        progressColor = [UIColor redColor];
+    }
+    if (self.progressSlider!=nil) {
+           self.progressSlider.minimumTrackTintColor = progressColor;
+    }
+}
+/**
  * 设置当前播放的时间
  **/
 - (void)setCurrentTime:(double)time{
@@ -550,10 +564,15 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     if (self.delegate&&[self.delegate respondsToSelector:@selector(kyvedioPlayer:singleTaped:)]) {
         [self.delegate kyvedioPlayer:self singleTaped:sender];
     }
-    [self.autoDismissTimer invalidate];
-    self.autoDismissTimer = nil;
-    self.autoDismissTimer = [NSTimer timerWithTimeInterval:5.0 target:self selector:@selector(autoDismissBottomView:) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:self.autoDismissTimer forMode:NSDefaultRunLoopMode];
+    if (_isAutoDismissBottomView == YES) {  //每5秒 自动隐藏底部视图
+        if ([self.autoDismissTimer isValid]) {
+            [self.autoDismissTimer invalidate];
+            self.autoDismissTimer = nil;
+        }
+        self.autoDismissTimer = [NSTimer timerWithTimeInterval:5.0 target:self selector:@selector(autoDismissBottomView:) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:self.autoDismissTimer forMode:NSDefaultRunLoopMode];
+    }
+   
     [UIView animateWithDuration:0.5 animations:^{
         if (self.bottomView.alpha == 0.0) {
             self.bottomView.alpha = 1.0;
@@ -731,7 +750,6 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 #pragma mark KVO 监听
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     /* AVPlayerItem "status" property value observer. */
-    
     if (context == PlayViewStatusObservationContext)
     {
         if ([keyPath isEqualToString:@"status"]) {
@@ -769,14 +787,14 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
                     //监听播放状态
                     [self initTimer];
                     
-                    
-                    //5s dismiss bottomView
-                    if (self.autoDismissTimer==nil) {
-                        self.autoDismissTimer = [NSTimer timerWithTimeInterval:5.0 target:self selector:@selector(autoDismissBottomView:) userInfo:nil repeats:YES];
-                        [[NSRunLoop currentRunLoop] addTimer:self.autoDismissTimer forMode:NSDefaultRunLoopMode];
+                    if (_isAutoDismissBottomView == YES) {  //每5秒 自动隐藏底部视图
+                        if (self.autoDismissTimer==nil) {
+                            self.autoDismissTimer = [NSTimer timerWithTimeInterval:5.0 target:self selector:@selector(autoDismissBottomView:) userInfo:nil repeats:YES];
+                            [[NSRunLoop currentRunLoop] addTimer:self.autoDismissTimer forMode:NSDefaultRunLoopMode];
+                        }
                     }
                     
-                    if (self.delegate&&[self.delegate respondsToSelector:@selector(kyvedioPlayerReadyToPlay:playerStatus:)]) {
+                    if (self.delegate && [self.delegate respondsToSelector:@selector(kyvedioPlayerReadyToPlay:playerStatus:)]) {
                         [self.delegate kyvedioPlayerReadyToPlay:self playerStatus:KYVedioPlayerStatusReadyToPlay];
                     }
                     [self.loadingView stopAnimating];
@@ -835,8 +853,6 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     }
     
 }
-
-
 /**
  *  缓冲回调
  */
@@ -848,7 +864,6 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         [self.loadingView stopAnimating];
     });
 }
-
 #pragma  mark - 定时器 监听播放状态
 -(void)initTimer{
     double interval = .1f;
@@ -868,7 +883,6 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
                                                                           usingBlock:^(CMTime time){
                                                                               [weakSelf syncScrubber];
                                                                           }];
-    
 }
 - (void)syncScrubber{
     CMTime playerDuration = [self playerItemDuration];
@@ -965,10 +979,6 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     self.volumeSlider.value = self.systemSlider.value;
     //记录下第一个点的位置,用于moved方法判断用户是调节音量还是调节视频
     self.originalPoint = self.firstPoint;
-    
-    
-    //    UISlider *volumeSlider = (UISlider *)[self viewWithTag:1000];
-    //    volumeSlider.value = systemSlider.value;
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -1027,16 +1037,123 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     }
     
     self.firstPoint = self.secondPoint;
-    //    systemSlider.value += (self.firstPoint.y - self.secondPoint.y)/500.0;
-    //    UISlider *volumeSlider = (UISlider *)[self viewWithTag:1000];
-    //    volumeSlider.value = systemSlider.value;
-    //    self.firstPoint = self.secondPoint;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     self.firstPoint = self.secondPoint = CGPointZero;
 }
+#pragma mark - 全屏显示播放 和 缩小显示播放器
+/**
+ *  全屏显示播放
+ ＊ @param interfaceOrientation 方向
+ ＊ @param player 当前播放器
+ ＊ @param fatherView 当前父视图
+ **/
+-(void)showFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation player:(KYVedioPlayer *)player withFatherView:(UIView *)fatherView{
 
+    [player removeFromSuperview];
+    player.transform = CGAffineTransformIdentity;
+    if (interfaceOrientation==UIInterfaceOrientationLandscapeLeft) {
+        player.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    }else if(interfaceOrientation==UIInterfaceOrientationLandscapeRight){
+        player.transform = CGAffineTransformMakeRotation(M_PI_2);
+    }
+    player.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    player.playerLayer.frame =  CGRectMake(0,0, kScreenHeight,kScreenWidth);
+    
+    [player.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(40);
+        make.top.mas_equalTo(kScreenWidth-40);
+        make.width.mas_equalTo(kScreenHeight);
+    }];
+    [player.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(40);
+        make.left.equalTo(player).with.offset(0);
+        make.width.mas_equalTo(kScreenHeight);
+    }];
+    [player.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(player.topView).with.offset(5);
+        make.height.mas_equalTo(30);
+        make.top.equalTo(player.topView).with.offset(5);
+        make.width.mas_equalTo(30);
+    }];
+    [player.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(player.topView).with.offset(45);
+        make.right.equalTo(player.topView).with.offset(-45);
+        make.center.equalTo(player.topView);
+        make.top.equalTo(player.topView).with.offset(0);
+        
+    }];
+    [player.loadFailedLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(kScreenHeight);
+        make.center.mas_equalTo(CGPointMake(kScreenWidth/2-36, -(kScreenWidth/2)+36));
+        make.height.equalTo(@30);
+    }];
+    [player.loadingView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(CGPointMake(kScreenWidth/2-37, -(kScreenWidth/2-37)));
+    }];
+   [fatherView addSubview:player];
+    player.fullScreenBtn.selected = YES;
+    [player bringSubviewToFront:player.bottomView];
+    
+}
+/**
+ *  小屏幕显示播放
+ ＊ @param player 当前播放器
+ ＊ @param fatherView 当前父视图
+ ＊ @param playerFrame 小屏幕的Frame
+ **/
+-(void)showSmallScreenWithPlayer:(KYVedioPlayer *)player withFatherView:(UIView *)fatherView withFrame:(CGRect )playerFrame{
+
+    [player removeFromSuperview];
+    [UIView animateWithDuration:0.5f animations:^{
+        player.transform = CGAffineTransformIdentity;
+        player.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
+        player.playerLayer.frame =  player.bounds;
+        [fatherView addSubview:player];
+        [player.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(player).with.offset(0);
+            make.right.equalTo(player).with.offset(0);
+            make.height.mas_equalTo(40);
+            make.bottom.equalTo(player).with.offset(0);
+        }];
+        
+        
+        [player.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(player).with.offset(0);
+            make.right.equalTo(player).with.offset(0);
+            make.height.mas_equalTo(40);
+            make.top.equalTo(player).with.offset(0);
+        }];
+        
+        
+        [player.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(player.topView).with.offset(5);
+            make.height.mas_equalTo(30);
+            make.top.equalTo(player.topView).with.offset(5);
+            make.width.mas_equalTo(30);
+        }];
+        
+        
+        [player.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(player.topView).with.offset(45);
+            make.right.equalTo(player.topView).with.offset(-45);
+            make.center.equalTo(player.topView);
+            make.top.equalTo(player.topView).with.offset(0);
+        }];
+        
+        [player.loadFailedLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(player);
+            make.width.equalTo(player);
+            make.height.equalTo(@30);
+        }];
+        
+    }completion:^(BOOL finished) {
+        player.isFullscreen = NO;
+        player.fullScreenBtn.selected = NO;
+        
+    }];
+}
 #pragma mark - 重置播放器 或 销毁
 /**
  * 重置播放器
@@ -1048,8 +1165,11 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     // 移除通知
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     // 关闭定时器
-    [self.autoDismissTimer invalidate];
-    self.autoDismissTimer = nil;
+    if ([self.autoDismissTimer isValid]) {
+        [self.autoDismissTimer invalidate];
+        self.autoDismissTimer = nil;
+    }
+    self.playOrPauseBtn = nil;
     // 暂停
     [self.player pause];
     // 移除原来的layer
@@ -1057,8 +1177,9 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     // 替换PlayerItem为nil
     [self.player replaceCurrentItemWithPlayerItem:nil];
     // 把player置为nil
+    self.playerLayer = nil;
     self.player = nil;
-
+    
 }
 
 

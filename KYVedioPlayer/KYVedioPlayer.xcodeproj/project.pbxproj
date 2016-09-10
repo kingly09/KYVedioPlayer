@@ -12,7 +12,6 @@
 		BC22D6431D8264C3007F040A /* KYLocalVideoPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D6421D8264C3007F040A /* KYLocalVideoPlayVC.m */; };
 		BC22D6461D826504007F040A /* KYRememberLastPlayedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D6451D826504007F040A /* KYRememberLastPlayedVC.m */; };
 		BC22D6491D826548007F040A /* KYSwitchFreelyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D6481D826548007F040A /* KYSwitchFreelyVC.m */; };
-		BC22D64B1D828901007F040A /* test.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = BC22D64A1D828901007F040A /* test.mp4 */; };
 		BC22D64E1D829225007F040A /* KYVedioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D64D1D829225007F040A /* KYVedioPlayer.m */; };
 		BC4CE87B1D815D8D00E6475C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE87A1D815D8D00E6475C /* main.m */; };
 		BC4CE87E1D815D8D00E6475C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE87D1D815D8D00E6475C /* AppDelegate.m */; };
@@ -25,6 +24,7 @@
 		BC4CE8A21D815D8E00E6475C /* KYVedioPlayerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE8A11D815D8E00E6475C /* KYVedioPlayerUITests.m */; };
 		BC4CE8B61D8161F500E6475C /* KYBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE8B51D8161F500E6475C /* KYBaseNavigationController.m */; };
 		BC4CE8B91D81638200E6475C /* KYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE8B81D81638200E6475C /* KYBaseViewController.m */; };
+		BCD8E9721D83E54D00EC2F04 /* test.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = BCD8E9711D83E54D00EC2F04 /* test.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +56,6 @@
 		BC22D6451D826504007F040A /* KYRememberLastPlayedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYRememberLastPlayedVC.m; sourceTree = "<group>"; };
 		BC22D6471D826548007F040A /* KYSwitchFreelyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYSwitchFreelyVC.h; sourceTree = "<group>"; };
 		BC22D6481D826548007F040A /* KYSwitchFreelyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYSwitchFreelyVC.m; sourceTree = "<group>"; };
-		BC22D64A1D828901007F040A /* test.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.mp4; sourceTree = "<group>"; };
 		BC22D64C1D829225007F040A /* KYVedioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYVedioPlayer.h; sourceTree = "<group>"; };
 		BC22D64D1D829225007F040A /* KYVedioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYVedioPlayer.m; sourceTree = "<group>"; };
 		BC4CE8761D815D8D00E6475C /* KYVedioPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KYVedioPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +80,7 @@
 		BC4CE8B71D81638200E6475C /* KYBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KYBaseViewController.h; path = BaseNavigationController/KYBaseViewController.h; sourceTree = "<group>"; };
 		BC4CE8B81D81638200E6475C /* KYBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KYBaseViewController.m; path = BaseNavigationController/KYBaseViewController.m; sourceTree = "<group>"; };
 		BC4CE8BA1D8163D500E6475C /* KYVedioPlayer_PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYVedioPlayer_PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
+		BCD8E9711D83E54D00EC2F04 /* test.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +166,7 @@
 				BC4CE8AF1D81615200E6475C /* ViewControllers */,
 				BC4CE8881D815D8D00E6475C /* Assets.xcassets */,
 				BC4CE88A1D815D8D00E6475C /* LaunchScreen.storyboard */,
-				BC22D64A1D828901007F040A /* test.mp4 */,
+				BCD8E9711D83E54D00EC2F04 /* test.mp4 */,
 				BC4CE88D1D815D8D00E6475C /* Info.plist */,
 				BC4CE8851D815D8D00E6475C /* KYVedioPlayer.xcdatamodeld */,
 				BC4CE8791D815D8D00E6475C /* Supporting Files */,
@@ -341,7 +341,7 @@
 				BC4CE88C1D815D8D00E6475C /* LaunchScreen.storyboard in Resources */,
 				BC4CE8891D815D8D00E6475C /* Assets.xcassets in Resources */,
 				BC4CE8841D815D8D00E6475C /* Main.storyboard in Resources */,
-				BC22D64B1D828901007F040A /* test.mp4 in Resources */,
+				BCD8E9721D83E54D00EC2F04 /* test.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

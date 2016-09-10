@@ -92,6 +92,10 @@ typedef NS_ENUM(NSInteger, CloseBtnStyle){
  */
 @property (nonatomic, retain) NSTimer        *autoDismissTimer;
 /**
+ *  BOOL值判断是否自动隐藏底部视图,默认是自动隐藏
+ */
+@property (nonatomic,assign ) BOOL            isAutoDismissBottomView;
+/**
  *  BOOL值判断当前的状态
  */
 @property (nonatomic,assign ) BOOL            isFullscreen;
@@ -131,8 +135,12 @@ typedef NS_ENUM(NSInteger, CloseBtnStyle){
  *  跳到time处播放
  *  @param seekTime这个时刻，这个时间点
  */
-
 @property (nonatomic, assign) double  seekTime;
+/**
+ *  进度条的颜色
+ *  @param progressColor
+ */
+@property (nonatomic,strong)  UIColor *progressColor;
 /**
  *  播放
  */
@@ -154,6 +162,19 @@ typedef NS_ENUM(NSInteger, CloseBtnStyle){
  * 重置播放器
  */
 - (void )resetKYVedioPlayer;
-
+/**
+ *  全屏显示播放
+ ＊ @param interfaceOrientation 方向
+ ＊ @param player 当前播放器
+ ＊ @param fatherView 当前父视图
+ **/
+-(void)showFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation player:(KYVedioPlayer *)player withFatherView:(UIView *)fatherView;
+/**
+ *  小屏幕显示播放
+ ＊ @param player 当前播放器
+ ＊ @param fatherView 当前父视图
+ ＊ @param playerFrame 小屏幕的Frame
+ **/
+-(void)showSmallScreenWithPlayer:(KYVedioPlayer *)player withFatherView:(UIView *)fatherView withFrame:(CGRect )playerFrame;
 
 @end
