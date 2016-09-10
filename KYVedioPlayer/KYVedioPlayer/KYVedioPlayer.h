@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Masonry.h"
 @import MediaPlayer;
 @import AVFoundation;
 @import UIKit;
