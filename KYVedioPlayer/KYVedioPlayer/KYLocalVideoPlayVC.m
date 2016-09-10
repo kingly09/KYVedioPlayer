@@ -28,7 +28,7 @@
     vedioPlayer.delegate = self;
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"mp4"];
-    if (_URLString == nil) {
+    if (_URLString.length == 0) {
         _URLString  = path;
     }
     vedioPlayer.URLString = _URLString;

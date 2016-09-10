@@ -7,8 +7,12 @@
 //
 
 #import "KYNetworkVideoCellPlayVC.h"
+#import "KYLocalVideoPlayVC.h"
+#import "KYVideo.h"
 
-@interface KYNetworkVideoCellPlayVC ()
+@interface KYNetworkVideoCellPlayVC ()<UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) UITableView		*tableView;
+@property (nonatomic, strong) NSArray			*dataSource;
 
 @end
 
@@ -17,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setUpView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,6 +29,73 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma  mark - 初始化方法
+- (void)setUpView {
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.tableView = ({
+        UITableView *tableView	= [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+        tableView.delegate		= self;
+        tableView.dataSource	= self;
+        tableView;
+    });
+    [self.view addSubview:self.tableView];
+}
+
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    self.tableView.frame = self.view.bounds;
+}
+/**
+ * Lazy 加载数据
+ **/
+- (NSArray *)dataSource {
+    if (_dataSource) {
+        return _dataSource;
+    }
+    NSArray *arr = @[
+                    
+                    @{@"title":@"视频一",
+                      @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
+                      @"video":@"http://7rfkz6.com1.z0.glb.clouddn.com/480p_20160229_T2.mp4"},
+                    
+                    @{@"title":@"视频二",
+                      @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
+                      @"video":@"http://7rfkz6.com1.z0.glb.clouddn.com/%20480p_160111_Remixmini.mp4"},
+                    
+                    @{@"title":@"视频三",
+                      @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
+                      @"video":@"http://7rfkz6.com1.z0.glb.clouddn.com/480p_150930_iPhone6s.mp4"},
+                    
+                    @{@"title":@"视频四",
+                      @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
+                      @"video":@"http://7rfkz6.com1.z0.glb.clouddn.com/480p_150902_jianguoshouji.mp4"},
+                    
+                    @{@"title":@"视频五",
+                      @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
+                      @"video":@"http://7rfkz6.com1.z0.glb.clouddn.com/480p_150814_oneplus2.mp4"},
+                    
+                    @{@"title":@"视频六",
+                      @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
+                      @"video":@"http://5069.vod.myqcloud.com/5069_492c1d36d8d111e58e6e3b72aa110d6e.f20.mp4"},
+                    
+                    @{@"title":@"视频七",
+                      @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
+                      @"video":@"http://7rfkz6.com1.z0.glb.clouddn.com/480p_20150528_nubiaz9.mp4"},
+                    
+                    ];
+    
+    NSMutableArray *arrVideo = [NSMutableArray array];
+    for (NSDictionary *video in arr) {
+        KYVideo *kYVideo = [[KYVideo alloc] init];
+        kYVideo.title = [video objectForKey:@"title"];
+        kYVideo.image = [video objectForKey:@"image"];
+        kYVideo.video = [video objectForKey:@"video"];
+        [arrVideo addObject:kYVideo];
+    }
+    _dataSource = arrVideo;
+    return _dataSource;
+}
 /*
 #pragma mark - Navigation
 
@@ -33,5 +105,56 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.dataSource.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
+    
+    KYVideo *kYVideo  = self.dataSource[indexPath.row];
+    cell.textLabel.text = kYVideo.title;
+    
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.1;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    KYLocalVideoPlayVC *localVideoPlayVC = [[KYLocalVideoPlayVC alloc] init];
+    KYVideo *kYVideo  = self.dataSource[indexPath.row];
+    localVideoPlayVC.title = kYVideo.title;
+    localVideoPlayVC.URLString = kYVideo.video;
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    backItem.title = @"返回";
+    self.navigationItem.backBarButtonItem = backItem;
+    [self.navigationController pushViewController:localVideoPlayVC animated:YES];
+   
+}
+
+
 
 @end

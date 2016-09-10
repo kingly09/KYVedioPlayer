@@ -25,6 +25,7 @@
 		BC4CE8B61D8161F500E6475C /* KYBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE8B51D8161F500E6475C /* KYBaseNavigationController.m */; };
 		BC4CE8B91D81638200E6475C /* KYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE8B81D81638200E6475C /* KYBaseViewController.m */; };
 		BCD8E9721D83E54D00EC2F04 /* test.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = BCD8E9711D83E54D00EC2F04 /* test.mp4 */; };
+		BCD8E9761D83F04100EC2F04 /* KYVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD8E9751D83F04100EC2F04 /* KYVideo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,8 @@
 		BC4CE8B81D81638200E6475C /* KYBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KYBaseViewController.m; path = BaseNavigationController/KYBaseViewController.m; sourceTree = "<group>"; };
 		BC4CE8BA1D8163D500E6475C /* KYVedioPlayer_PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYVedioPlayer_PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
 		BCD8E9711D83E54D00EC2F04 /* test.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.mp4; sourceTree = "<group>"; };
+		BCD8E9741D83F04100EC2F04 /* KYVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYVideo.h; sourceTree = "<group>"; };
+		BCD8E9751D83F04100EC2F04 /* KYVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYVideo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +164,7 @@
 				BC4CE87C1D815D8D00E6475C /* AppDelegate.h */,
 				BC4CE87D1D815D8D00E6475C /* AppDelegate.m */,
 				BC4CE8BA1D8163D500E6475C /* KYVedioPlayer_PrefixHeader.pch */,
+				BCD8E9731D83F01600EC2F04 /* Model */,
 				BC22D63D1D82600B007F040A /* TableViewCell */,
 				BC4CE8B31D8161CF00E6475C /* BaseNavigationController */,
 				BC4CE8AF1D81615200E6475C /* ViewControllers */,
@@ -229,6 +233,15 @@
 				BC4CE8B51D8161F500E6475C /* KYBaseNavigationController.m */,
 			);
 			name = BaseNavigationController;
+			sourceTree = "<group>";
+		};
+		BCD8E9731D83F01600EC2F04 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BCD8E9741D83F04100EC2F04 /* KYVideo.h */,
+				BCD8E9751D83F04100EC2F04 /* KYVideo.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -425,6 +438,7 @@
 				BC4CE87E1D815D8D00E6475C /* AppDelegate.m in Sources */,
 				BC4CE8871D815D8D00E6475C /* KYVedioPlayer.xcdatamodeld in Sources */,
 				BC4CE87B1D815D8D00E6475C /* main.m in Sources */,
+				BCD8E9761D83F04100EC2F04 /* KYVideo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
