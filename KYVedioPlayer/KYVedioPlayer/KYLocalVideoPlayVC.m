@@ -57,58 +57,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)toNormal{
-    [vedioPlayer removeFromSuperview];
-    [UIView animateWithDuration:0.5f animations:^{
-        vedioPlayer.transform = CGAffineTransformIdentity;
-        vedioPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
-        vedioPlayer.playerLayer.frame =  vedioPlayer.bounds;
-        [self.view addSubview:vedioPlayer];
-        [vedioPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(vedioPlayer).with.offset(0);
-            make.right.equalTo(vedioPlayer).with.offset(0);
-            make.height.mas_equalTo(40);
-            make.bottom.equalTo(vedioPlayer).with.offset(0);
-        }];
-        
-        
-        [vedioPlayer.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(vedioPlayer).with.offset(0);
-            make.right.equalTo(vedioPlayer).with.offset(0);
-            make.height.mas_equalTo(40);
-            make.top.equalTo(vedioPlayer).with.offset(0);
-        }];
-        
-        
-        [vedioPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(vedioPlayer.topView).with.offset(5);
-            make.height.mas_equalTo(30);
-            make.top.equalTo(vedioPlayer.topView).with.offset(5);
-            make.width.mas_equalTo(30);
-        }];
-        
-        
-        [vedioPlayer.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(vedioPlayer.topView).with.offset(45);
-            make.right.equalTo(vedioPlayer.topView).with.offset(-45);
-            make.center.equalTo(vedioPlayer.topView);
-            make.top.equalTo(vedioPlayer.topView).with.offset(0);
-        }];
-        
-        [vedioPlayer.loadFailedLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(vedioPlayer);
-            make.width.equalTo(vedioPlayer);
-            make.height.equalTo(@30);
-        }];
-        
-    }completion:^(BOOL finished) {
-        vedioPlayer.isFullscreen = NO;
-        [self setNeedsStatusBarAppearanceUpdate];
-        vedioPlayer.fullScreenBtn.selected = NO;
-        
-    }];
-}
-
 
 /**
  *  注销播放器
@@ -153,11 +101,9 @@
 
      NSLog(@"[KYVedioPlayer] clickedCloseButton ");
     if (kyvedioPlayer.isFullscreen == YES) {
-//        [self setNeedsStatusBarAppearanceUpdate];
-//        [kyvedioPlayer showSmallScreenWithPlayer:kyvedioPlayer withFatherView:self.view withFrame:playerFrame];
+        [self setNeedsStatusBarAppearanceUpdate];
+        [kyvedioPlayer showSmallScreenWithPlayer:kyvedioPlayer withFatherView:self.view withFrame:playerFrame];
         
-        [self toNormal];
-
     }else{
         
         [self releasePlayer];
@@ -175,11 +121,8 @@
         [kyvedioPlayer showFullScreenWithInterfaceOrientation:UIInterfaceOrientationLandscapeLeft player:kyvedioPlayer withFatherView:self.view];
     }else{
     
-//         [self setNeedsStatusBarAppearanceUpdate];
-//        [kyvedioPlayer showSmallScreenWithPlayer:kyvedioPlayer withFatherView:self.view withFrame:playerFrame];
-        
-         [self toNormal];
-       
+         [self setNeedsStatusBarAppearanceUpdate];
+        [kyvedioPlayer showSmallScreenWithPlayer:kyvedioPlayer withFatherView:self.view withFrame:playerFrame];
     }
 
 }
@@ -227,10 +170,9 @@
         case UIInterfaceOrientationPortrait:{
             NSLog(@"第0个旋转方向---电池栏在上");
             if (vedioPlayer.isFullscreen) {
-//                [self setNeedsStatusBarAppearanceUpdate];
-//                [vedioPlayer showSmallScreenWithPlayer:vedioPlayer withFatherView:self.view withFrame:playerFrame];
+                [self setNeedsStatusBarAppearanceUpdate];
+                [vedioPlayer showSmallScreenWithPlayer:vedioPlayer withFatherView:self.view withFrame:playerFrame];
                 
-                 [self toNormal];
             }
         }
             break;
