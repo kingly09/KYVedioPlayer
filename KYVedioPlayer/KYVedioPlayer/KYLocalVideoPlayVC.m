@@ -28,10 +28,7 @@
     vedioPlayer.delegate = self;
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"mp4"];
-    
-    NSLog(@"path::%@",path);
-    
-    vedioPlayer.URLString = @"http://7rfkz6.com1.z0.glb.clouddn.com/480p_20150528_nubiaz9.mp4";
+    vedioPlayer.URLString = path;
     vedioPlayer.titleLabel.text = self.title;
     vedioPlayer.closeBtn.hidden = NO;
     [self.view addSubview:vedioPlayer];

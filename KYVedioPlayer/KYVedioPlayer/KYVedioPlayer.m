@@ -365,7 +365,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 - (void)setURLString:(NSString *)URLString{
     _URLString = URLString;
     //设置player的参数
-    self.currentItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:URLString]];
+    self.currentItem = [self getPlayItemWithURLString:URLString];
     
     self.player = [AVPlayer playerWithPlayerItem:_currentItem];
     self.player.usesExternalPlaybackWhileExternalScreenIsActive=YES;
@@ -385,6 +385,20 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         [_closeBtn setImage:[UIImage imageNamed:@"ic_close"] ?: [UIImage imageNamed:@"ic_close"] forState:UIControlStateNormal];
         [_closeBtn setImage:[UIImage imageNamed:@"ic_close"] ?: [UIImage imageNamed:@"ic_close"] forState:UIControlStateSelected];
     }
+}
+/**
+ *  判断是否是网络视频 还是 本地视频
+ **/
+-(AVPlayerItem *)getPlayItemWithURLString:(NSString *)url{
+    if ([url containsString:@"http"]) {
+        AVPlayerItem *playerItem=[AVPlayerItem playerItemWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+        return playerItem;
+    }else{
+        AVAsset *movieAsset  = [[AVURLAsset alloc]initWithURL:[NSURL fileURLWithPath:url] options:nil];
+        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:movieAsset];
+        return playerItem;
+    }
+    
 }
 
 /**
