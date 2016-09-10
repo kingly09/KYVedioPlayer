@@ -68,7 +68,7 @@
                       @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
                       @"video":@"http://movies.apple.com/media/us/iphone/2010/tours/apple-iphone4-design_video-us-20100607_848x480.mov"},
                     
-                    @{@"title":@"视频四 3gp",
+                    @{@"title":@"视频四 3gp格式",
                       @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
                       @"video":path3gp},
                     
