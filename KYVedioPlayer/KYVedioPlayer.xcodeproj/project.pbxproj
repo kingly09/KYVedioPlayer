@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96F8FFD8293261A1F369A971 /* libPods-KYVedioPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5819A2B161735398808013BB /* libPods-KYVedioPlayer.a */; };
 		BC22D6401D826440007F040A /* KYNetworkVideoCellPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D63F1D826440007F040A /* KYNetworkVideoCellPlayVC.m */; };
 		BC22D6431D8264C3007F040A /* KYLocalVideoPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D6421D8264C3007F040A /* KYLocalVideoPlayVC.m */; };
 		BC22D6461D826504007F040A /* KYRememberLastPlayedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D6451D826504007F040A /* KYRememberLastPlayedVC.m */; };
@@ -44,6 +45,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		016D9F1098A3EF24734A5535 /* Pods-KYVedioPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KYVedioPlayer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KYVedioPlayer/Pods-KYVedioPlayer.debug.xcconfig"; sourceTree = "<group>"; };
+		55849D2107A70892AE30CD96 /* Pods-KYVedioPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KYVedioPlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-KYVedioPlayer/Pods-KYVedioPlayer.release.xcconfig"; sourceTree = "<group>"; };
+		5819A2B161735398808013BB /* libPods-KYVedioPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KYVedioPlayer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC22D63E1D826440007F040A /* KYNetworkVideoCellPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYNetworkVideoCellPlayVC.h; sourceTree = "<group>"; };
 		BC22D63F1D826440007F040A /* KYNetworkVideoCellPlayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYNetworkVideoCellPlayVC.m; sourceTree = "<group>"; };
 		BC22D6411D8264C3007F040A /* KYLocalVideoPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYLocalVideoPlayVC.h; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96F8FFD8293261A1F369A971 /* libPods-KYVedioPlayer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +109,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		503DD6E42C8E44B757643B38 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5819A2B161735398808013BB /* libPods-KYVedioPlayer.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6A46C423142FA0CDDB6E7F78 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				016D9F1098A3EF24734A5535 /* Pods-KYVedioPlayer.debug.xcconfig */,
+				55849D2107A70892AE30CD96 /* Pods-KYVedioPlayer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BC22D63D1D82600B007F040A /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +140,8 @@
 				BC4CE8951D815D8E00E6475C /* KYVedioPlayerTests */,
 				BC4CE8A01D815D8E00E6475C /* KYVedioPlayerUITests */,
 				BC4CE8771D815D8D00E6475C /* Products */,
+				6A46C423142FA0CDDB6E7F78 /* Pods */,
+				503DD6E42C8E44B757643B38 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -214,9 +238,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BC4CE8A61D815D8E00E6475C /* Build configuration list for PBXNativeTarget "KYVedioPlayer" */;
 			buildPhases = (
+				3D61121C87AA2491A17C2569 /* [CP] Check Pods Manifest.lock */,
 				BC4CE8721D815D8D00E6475C /* Sources */,
 				BC4CE8731D815D8D00E6475C /* Frameworks */,
 				BC4CE8741D815D8D00E6475C /* Resources */,
+				C7622ECFA0C1B311DCA243F6 /* [CP] Embed Pods Frameworks */,
+				969A0EE8C8FF494D55F52DAE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -333,6 +360,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3D61121C87AA2491A17C2569 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		969A0EE8C8FF494D55F52DAE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KYVedioPlayer/Pods-KYVedioPlayer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C7622ECFA0C1B311DCA243F6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KYVedioPlayer/Pods-KYVedioPlayer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BC4CE8721D815D8D00E6475C /* Sources */ = {
@@ -490,6 +565,7 @@
 		};
 		BC4CE8A71D815D8E00E6475C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 016D9F1098A3EF24734A5535 /* Pods-KYVedioPlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = KYVedioPlayer_PrefixHeader.pch;
@@ -502,6 +578,7 @@
 		};
 		BC4CE8A81D815D8E00E6475C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55849D2107A70892AE30CD96 /* Pods-KYVedioPlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = KYVedioPlayer_PrefixHeader.pch;
