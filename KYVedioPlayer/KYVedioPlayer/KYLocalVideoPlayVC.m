@@ -93,7 +93,7 @@
     // Pass the selected object to the new view controller.
 }
 */
-#pragma make - KYVedioPlayerDelegate 播放器委托方法
+#pragma mark - KYVedioPlayerDelegate 播放器委托方法
 //点击播放暂停按钮代理方法
 -(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer clickedPlayOrPauseButton:(UIButton *)playOrPauseBtn{
 

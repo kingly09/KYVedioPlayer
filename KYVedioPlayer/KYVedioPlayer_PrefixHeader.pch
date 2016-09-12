@@ -23,4 +23,8 @@
 #define kStatusBarHeight ([[UIApplication sharedApplication]statusBarFrame].size.height)//状态栏高度
 #define kNavgationBarHeight (64.0f) //NavgationBar的高度
 
+#define kNavbarHeight ((kDeviceVersion>=7.0)? 64 :44 )
+#define kIOS7DELTA   ((kDeviceVersion>=7.0)? 20 :0 )
+#define kTabBarHeight 49
+
 #endif /* KYVedioPlayer_PrefixHeader_pch */

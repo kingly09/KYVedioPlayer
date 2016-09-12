@@ -11,13 +11,17 @@
 #import "KYVideo.h"
 #import "KYNetworkVideoCell.h"
 
-@interface KYNetworkVideoCellPlayVC ()<UITableViewDelegate, UITableViewDataSource,KYNetworkVideoCellDelegate>
+@interface KYNetworkVideoCellPlayVC ()<UITableViewDelegate, UITableViewDataSource,KYNetworkVideoCellDelegate,KYVedioPlayerDelegate>
 @property (nonatomic, strong) UITableView		*tableView;
 @property (nonatomic, strong) NSArray			*dataSource;
 
 @end
 
-@implementation KYNetworkVideoCellPlayVC
+@implementation KYNetworkVideoCellPlayVC{
+
+     KYVedioPlayer *vedioPlayer;
+     NSIndexPath *currentIndexPath;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,6 +34,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(BOOL)prefersStatusBarHidden{
+    if (vedioPlayer) {
+        if (vedioPlayer.isFullscreen) {
+            return YES;
+        }else{
+            return NO;
+        }
+    }else{
+        return NO;
+    }
+}
+
+-(KYNetworkVideoCell *)currentTableCell{
+    if (currentIndexPath==nil) {
+        return nil;
+    }
+    KYNetworkVideoCell *currentCell = (KYNetworkVideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndexPath.row inSection:0]];
+    return currentCell;
+}
+
+
 #pragma  mark - 初始化方法
 - (void)setUpView {
     self.view.backgroundColor = [UIColor whiteColor];
@@ -40,10 +65,6 @@
         [tableView registerClass:[KYNetworkVideoCell class] forCellReuseIdentifier:[KYNetworkVideoCell cellReuseIdentifier]];
         tableView;
     });
-    
-    
-  
-    
     [self.view addSubview:self.tableView];
 }
 
@@ -98,6 +119,7 @@
         kYVideo.title = [video objectForKey:@"title"];
         kYVideo.image = [video objectForKey:@"image"];
         kYVideo.video = [video objectForKey:@"video"];
+        
         [arrVideo addObject:kYVideo];
     }
     _dataSource = arrVideo;
@@ -133,8 +155,31 @@
     KYVideo *kYVideo  = self.dataSource[indexPath.row];
 
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.indexPath = indexPath;
     cell.video = kYVideo;
     cell.mydelegate = self;
+    
+    if (vedioPlayer && vedioPlayer.superview) {
+       
+        NSArray *indexpaths = [tableView indexPathsForVisibleRows];
+        if (![indexpaths containsObject:currentIndexPath]&&currentIndexPath!=nil) {//复用
+            
+            if ([[UIApplication sharedApplication].keyWindow.subviews containsObject:vedioPlayer]) {
+                vedioPlayer.hidden = NO;
+            }else{
+                vedioPlayer.hidden = YES;
+            }
+        }else{
+            if ([cell.contentView.subviews containsObject:vedioPlayer]) {
+                [cell.contentView addSubview:vedioPlayer];
+                
+                [vedioPlayer play];
+                vedioPlayer.hidden = NO;
+            }
+            
+        }
+    }
+
     
     return cell;
 }
@@ -187,7 +232,91 @@
 }
 
 -(void)networkVideoCellOnClickVideoPlay:(KYVideo *)video{
+    currentIndexPath = video.indexPath;
+
+    KYNetworkVideoCell *cell = (KYNetworkVideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:video.indexPath.row inSection:video.indexPath.section]];
     
+    if (vedioPlayer) {
+        [self releasePlayer];
+         vedioPlayer = [[KYVedioPlayer alloc]initWithFrame:cell.contentView.bounds];
+         vedioPlayer.delegate = self;
+         vedioPlayer.closeBtnStyle = CloseBtnStyleClose;
+         vedioPlayer.URLString = video.video;
+    }else{
+    
+        vedioPlayer = [[KYVedioPlayer alloc]initWithFrame:cell.contentView.bounds];
+        vedioPlayer.delegate = self;
+        vedioPlayer.closeBtnStyle = CloseBtnStyleClose;
+        vedioPlayer.URLString = video.video;
+    }
+    [cell.contentView addSubview:vedioPlayer];
+    [vedioPlayer play];
+    [self.tableView reloadData];
+    
+}
+
+#pragma mark - KYVedioPlayerDelegate 播放器委托方法
+//点击播放暂停按钮代理方法
+-(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer clickedPlayOrPauseButton:(UIButton *)playOrPauseBtn{
+    
+    NSLog(@"[KYVedioPlayer] clickedPlayOrPauseButton ");
+}
+//点击关闭按钮代理方法
+-(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer clickedCloseButton:(UIButton *)closeBtn{
+    
+    NSLog(@"[KYVedioPlayer] clickedCloseButton ");
+}
+//点击全屏按钮代理方法
+-(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer clickedFullScreenButton:(UIButton *)fullScreenBtn{
+    NSLog(@"[KYVedioPlayer] clickedFullScreenButton ");
+    
+    
+}
+//单击WMPlayer的代理方法
+-(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer singleTaped:(UITapGestureRecognizer *)singleTap{
+    
+    NSLog(@"[KYVedioPlayer] singleTaped ");
+}
+//双击WMPlayer的代理方法
+-(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer doubleTaped:(UITapGestureRecognizer *)doubleTap{
+    
+    NSLog(@"[KYVedioPlayer] doubleTaped ");
+}
+
+///播放状态
+//播放失败的代理方法
+-(void)kyvedioPlayerFailedPlay:(KYVedioPlayer *)kyvedioPlayer playerStatus:(KYVedioPlayerState)state{
+    NSLog(@"[KYVedioPlayer] kyvedioPlayerFailedPlay  播放失败");
+}
+//准备播放的代理方法
+-(void)kyvedioPlayerReadyToPlay:(KYVedioPlayer *)kyvedioPlayer playerStatus:(KYVedioPlayerState)state{
+    
+    NSLog(@"[KYVedioPlayer] kyvedioPlayerReadyToPlay  准备播放");
+}
+//播放完毕的代理方法
+-(void)kyplayerFinishedPlay:(KYVedioPlayer *)kyvedioPlayer{
+    
+    NSLog(@"[KYVedioPlayer] kyvedioPlayerReadyToPlay  播放完毕");
+    if (vedioPlayer) {
+        [vedioPlayer removeFromSuperview];
+    }
+    
+}
+
+/**
+ *  注销播放器
+ **/
+- (void)releasePlayer
+{
+    [vedioPlayer resetKYVedioPlayer];
+    vedioPlayer = nil;
+}
+
+- (void)dealloc
+{
+    [self releasePlayer];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSLog(@"KYNetworkVideoCellPlayVC dealloc");
 }
 
 

@@ -105,6 +105,7 @@
 
 -(void)onClickVideoPlay:(id)sender{
 
+    _video.indexPath = _indexPath;
     if (_mydelegate && [_mydelegate respondsToSelector:@selector(networkVideoCellOnClickVideoPlay:)]) {
         [_mydelegate networkVideoCellOnClickVideoPlay:_video];
     }

@@ -16,7 +16,7 @@
 @property (nonatomic,weak) id<KYNetworkVideoCellDelegate>mydelegate;
 
 +(NSString *) cellReuseIdentifier;
-
+@property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic,strong) KYVideo *video;
 
 @end

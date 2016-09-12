@@ -19,4 +19,6 @@
  */
 @property (nonatomic,assign) CGFloat curCellHeight;
 
+@property (nonatomic, strong) NSIndexPath *indexPath;
+
 @end
