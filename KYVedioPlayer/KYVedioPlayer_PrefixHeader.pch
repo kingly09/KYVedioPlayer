@@ -14,6 +14,10 @@
 #import "KYBaseNavigationController.h"
 #import "KYBaseViewController.h"
 
+#import "SDWebImageManager.h"
+#import "UIImageView+WebCache.h"
+#import "KYVedioPlayer.h"
+
 #define kScreenWidth [[UIScreen mainScreen]bounds].size.width //屏幕宽度
 #define kScreenHeight [[UIScreen mainScreen]bounds].size.height //屏幕高度
 #define kStatusBarHeight ([[UIApplication sharedApplication]statusBarFrame].size.height)//状态栏高度

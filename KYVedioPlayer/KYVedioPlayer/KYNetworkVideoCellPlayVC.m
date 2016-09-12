@@ -9,8 +9,9 @@
 #import "KYNetworkVideoCellPlayVC.h"
 #import "KYLocalVideoPlayVC.h"
 #import "KYVideo.h"
+#import "KYNetworkVideoCell.h"
 
-@interface KYNetworkVideoCellPlayVC ()<UITableViewDelegate, UITableViewDataSource>
+@interface KYNetworkVideoCellPlayVC ()<UITableViewDelegate, UITableViewDataSource,KYNetworkVideoCellDelegate>
 @property (nonatomic, strong) UITableView		*tableView;
 @property (nonatomic, strong) NSArray			*dataSource;
 
@@ -36,8 +37,13 @@
         UITableView *tableView	= [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
         tableView.delegate		= self;
         tableView.dataSource	= self;
+        [tableView registerClass:[KYNetworkVideoCell class] forCellReuseIdentifier:[KYNetworkVideoCell cellReuseIdentifier]];
         tableView;
     });
+    
+    
+  
+    
     [self.view addSubview:self.tableView];
 }
 
@@ -57,15 +63,15 @@
     NSArray *arr = @[
                     
                     @{@"title":@"视频一 mp4 格式",
-                      @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
-                      @"video":@"http://7rfkz6.com1.z0.glb.clouddn.com/480p_20160229_T2.mp4"},
+                      @"image":@"http://vimg3.ws.126.net/image/snapshot/2016/9/L/1/VBVQVQRL1.jpg",
+                      @"video":@"http://flv2.bn.netease.com/videolib3/1609/12/yRxoB7561/SD/yRxoB7561-mobile.mp4"},
                     
                     @{@"title":@"视频二 m3u8格式",
-                      @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
-                      @"video":@"http://flv2.bn.netease.com/videolib3/1609/10/QElkL2832/SD/movie_index.m3u8"},
+                      @"image":@"http://vimg2.ws.126.net/image/snapshot/2016/9/7/7/VBV4B7Q77.jpg",
+                      @"video":@"http://flv2.bn.netease.com/videolib3/1609/03/WotPc9077/SD/movie_index.m3u8"},
                     
                     @{@"title":@"视频三 mov格式",
-                      @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
+                      @"image":@"http://img2.cache.netease.com/m/3g/mengchong.png",
                       @"video":@"http://movies.apple.com/media/us/iphone/2010/tours/apple-iphone4-design_video-us-20100607_848x480.mov"},
                     
                     @{@"title":@"视频四 3gp格式",
@@ -73,16 +79,16 @@
                       @"video":path3gp},
                     
                     @{@"title":@"视频五",
-                      @"image":@"http://vimg3.ws.126.net/image/snapshot/2016/9/V/A/VBVM8HAVA.jpg",
-                      @"video":@"http://flv2.bn.netease.com/videolib3/1609/05/shRkL5482/HD/movie_index.m3u8"},
+                      @"image":@"http://vimg3.ws.126.net/image/snapshot/2016/9/A/G/VBV4BB5AG.jpg",
+                      @"video":@"http://flv2.bn.netease.com/videolib3/1609/03/GVRLQ8933/SD/movie_index.m3u8"},
                     
                     @{@"title":@"视频六",
-                      @"image":@"http://wimg.spriteapp.cn/picture/2016/0309/56df7b64b4416_wpd.jpg",
-                      @"video":@"http://flv2.bn.netease.com/videolib3/1609/10/KMEzY9667/SD/KMEzY9667-mobile.mp4"},
+                      @"image":@"http://vimg3.ws.126.net/image/snapshot/2016/9/5/1/VBV4BEH51.jpg",
+                      @"video":@"http://flv2.bn.netease.com/videolib3/1609/03/lGPqA9142/SD/lGPqA9142-mobile.mp4"},
                     
                     @{@"title":@"视频七",
-                      @"image":@"http://vimg3.ws.126.net/image/snapshot/2016/9/O/J/VBVMCCMOJ.jpg",
-                      @"video":@"http://flv2.bn.netease.com/tvmrepo/2016/9/R/9/EBVLTSCR9/SD/movie_index.m3u8"},
+                      @"image":@"http://vimg3.ws.126.net/image/snapshot/2016/9/U/R/VBVQV83UR.jpg",
+                      @"video":@"http://flv2.bn.netease.com/videolib3/1609/12/aOzvT5225/HD/movie_index.m3u8"},
                     
                     ];
     
@@ -117,13 +123,18 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+  
+    KYNetworkVideoCell *cell = [tableView dequeueReusableCellWithIdentifier:[KYNetworkVideoCell cellReuseIdentifier]];
+    if (nil==cell)
+    {
+        cell = [[KYNetworkVideoCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[KYNetworkVideoCell cellReuseIdentifier]];
+        
     }
-    
     KYVideo *kYVideo  = self.dataSource[indexPath.row];
-    cell.textLabel.text = kYVideo.title;
+
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.video = kYVideo;
+    cell.mydelegate = self;
     
     return cell;
 }
@@ -131,7 +142,12 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    
+    if (self.dataSource.count > 0) {
+         KYVideo *kYVideo  = self.dataSource[indexPath.row];
+         return kYVideo.curCellHeight;
+    }
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -156,6 +172,23 @@
    
 }
 
+#pragma mark - KYNetworkVideoCellDelegate
+
+-(void)networkVideoCellVedioBgTapGesture:(KYVideo *)video{
+    
+    KYLocalVideoPlayVC *localVideoPlayVC = [[KYLocalVideoPlayVC alloc] init];
+    localVideoPlayVC.title = video.title;
+    localVideoPlayVC.URLString = video.video;
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    backItem.title = @"返回";
+    self.navigationItem.backBarButtonItem = backItem;
+    [self.navigationController pushViewController:localVideoPlayVC animated:YES];
+
+}
+
+-(void)networkVideoCellOnClickVideoPlay:(KYVideo *)video{
+    
+}
 
 
 @end

@@ -110,6 +110,7 @@
     }else{
         
         [self releasePlayer];
+        self.navigationController.navigationBarHidden = NO;
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

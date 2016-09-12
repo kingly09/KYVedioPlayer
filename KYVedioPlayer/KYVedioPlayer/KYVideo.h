@@ -14,4 +14,9 @@
 @property (nonatomic, strong) NSString * image;
 @property (nonatomic, strong) NSString * video;
 
+/**
+ *自定义cell的高度
+ */
+@property (nonatomic,assign) CGFloat curCellHeight;
+
 @end
