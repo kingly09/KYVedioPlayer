@@ -13,14 +13,19 @@ KYVedioPlayer 是基于AVPlayer的封装视频播放器,支持播放mp4、m3u8�
 
 - 项目中使用到的第三方库
 
-platform:ios,'7.0'
-target "KYVedioPlayer" do
-pod 'Masonry', '~> 1.0.1'
-pod 'MJRefresh', '~> 3.1.12'
-pod 'SDWebImage', '~> 3.8.2'
-pod 'MBProgressHUD', '~> 1.0.0'
+    platform:ios,'7.0'
 
-end
+    target "KYVedioPlayer" do
+
+    pod 'Masonry', '~> 1.0.1'
+
+    pod 'MJRefresh', '~> 3.1.12'
+
+    pod 'SDWebImage', '~> 3.8.2'
+
+    pod 'MBProgressHUD', '~> 1.0.0'
+
+    end
 
 
 ## 实现的功能
