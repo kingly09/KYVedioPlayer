@@ -25,11 +25,13 @@
     KYVedioPlayer *vedioPlayer;
     KYVideo *currentVideo;
     NSIndexPath *currentIndexPath;
+      BOOL isSmallScreen;
 }
 - (instancetype)init{
     self = [super init];
     if (self) {
         _dataSource = [NSMutableArray array];
+        isSmallScreen = NO;
     }
     return self;
 }
@@ -43,9 +45,16 @@
     [self addMJRefresh];
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    self.navigationController.navigationBarHidden = NO;
+    //旋转屏幕通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(NotificationDeviceOrientationChange:)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil
+     ];
 }
 
 -(void)loadDataList{
@@ -147,7 +156,7 @@
  * 显示 从全屏来当前的cell视频
  **/
 -(void)showCellCurrentVedioPlayer{
-    
+ 
     if (currentVideo != nil &&  currentIndexPath != nil) {
         
         KYNetworkVideoCell *currentCell = [self currentCell];
@@ -191,10 +200,61 @@
         }completion:^(BOOL finished) {
             vedioPlayer.isFullscreen = NO;
             [self setNeedsStatusBarAppearanceUpdate];
+            isSmallScreen = NO;
             vedioPlayer.fullScreenBtn.selected = NO;
             
         }];
     }
+}
+
+-(void)showSmallScreen{
+ 
+    //放widow上
+    [vedioPlayer removeFromSuperview];
+    [UIView animateWithDuration:0.5f animations:^{
+        vedioPlayer.transform = CGAffineTransformIdentity;
+        vedioPlayer.frame = CGRectMake(kScreenWidth/2,kScreenHeight-kTabBarHeight-(kScreenWidth/2)*0.75, kScreenWidth/2, (kScreenWidth/2)*0.75);
+        vedioPlayer.playerLayer.frame =  vedioPlayer.bounds;
+        [[UIApplication sharedApplication].keyWindow addSubview:vedioPlayer];
+        [vedioPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(vedioPlayer).with.offset(0);
+            make.right.equalTo(vedioPlayer).with.offset(0);
+            make.height.mas_equalTo(40);
+            make.bottom.equalTo(vedioPlayer).with.offset(0);
+        }];
+        [vedioPlayer.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(vedioPlayer).with.offset(0);
+            make.right.equalTo(vedioPlayer).with.offset(0);
+            make.height.mas_equalTo(40);
+            make.top.equalTo(vedioPlayer).with.offset(0);
+        }];
+        [vedioPlayer.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(vedioPlayer.topView).with.offset(45);
+            make.right.equalTo(vedioPlayer.topView).with.offset(-45);
+            make.center.equalTo(vedioPlayer.topView);
+            make.top.equalTo(vedioPlayer.topView).with.offset(0);
+        }];
+        [vedioPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(vedioPlayer).with.offset(5);
+            make.height.mas_equalTo(30);
+            make.width.mas_equalTo(30);
+            make.top.equalTo(vedioPlayer).with.offset(5);
+            
+        }];
+        [vedioPlayer.loadFailedLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(vedioPlayer);
+            make.width.equalTo(vedioPlayer);
+            make.height.equalTo(@30);
+        }];
+        
+    }completion:^(BOOL finished) {
+        vedioPlayer.isFullscreen = NO;
+        [self setNeedsStatusBarAppearanceUpdate];
+        vedioPlayer.fullScreenBtn.selected = NO;
+        isSmallScreen = YES;
+        [[UIApplication sharedApplication].keyWindow bringSubviewToFront:vedioPlayer];
+    }];
+
 }
 
 
@@ -343,6 +403,11 @@
         
     }
     
+    if (isSmallScreen) {
+        [self releasePlayer];
+        isSmallScreen = NO;
+    }
+    
     if (vedioPlayer) {
         [self releasePlayer];
         vedioPlayer = [[KYVedioPlayer alloc]initWithFrame:cell.vedioBg.bounds];
@@ -410,7 +475,14 @@
         [kyvedioPlayer showFullScreenWithInterfaceOrientation:UIInterfaceOrientationLandscapeLeft player:kyvedioPlayer withFatherView:self.view];
     }else{
         self.navigationController.navigationBarHidden = NO;
-        [self showCellCurrentVedioPlayer];
+    
+        if (isSmallScreen) {
+            //放widow上,小屏显示
+            [self showSmallScreen];
+        }else{
+            [self showCellCurrentVedioPlayer];
+            
+        }
         
     }
     
@@ -465,5 +537,88 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"KYSwitchFreelyVC dealloc");
 }
+
+
+
+#pragma mark - NotificationDeviceOrientationChange
+-(void)NotificationDeviceOrientationChange:(NSNotification *)notification{
+    
+    if (vedioPlayer == nil|| vedioPlayer.superview==nil){
+        return;
+    }
+    
+    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+    UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)orientation;
+    switch (interfaceOrientation) {
+        case UIInterfaceOrientationPortraitUpsideDown:{
+            NSLog(@"第3个旋转方向---电池栏在下");
+        }
+            break;
+        case UIInterfaceOrientationPortrait:{
+            NSLog(@"第0个旋转方向---电池栏在上");
+           
+            if (vedioPlayer.isFullscreen) {
+                if (isSmallScreen) {
+                    //放widow上,小屏显示
+                    [self showSmallScreen];
+                }else{
+                    [self showCellCurrentVedioPlayer];
+                }
+            }
+
+        }
+            break;
+        case UIInterfaceOrientationLandscapeLeft:{
+            NSLog(@"第2个旋转方向---电池栏在左");
+            vedioPlayer.isFullscreen = YES;
+            [self setNeedsStatusBarAppearanceUpdate];
+            [vedioPlayer showFullScreenWithInterfaceOrientation:interfaceOrientation player:vedioPlayer withFatherView:self.view];
+        }
+            break;
+        case UIInterfaceOrientationLandscapeRight:{
+            NSLog(@"第1个旋转方向---电池栏在右");
+            vedioPlayer.isFullscreen = YES;
+            [self setNeedsStatusBarAppearanceUpdate];
+            [vedioPlayer showFullScreenWithInterfaceOrientation:interfaceOrientation player:vedioPlayer withFatherView:self.view];
+        }
+            break;
+        default:
+            break;
+    }
+    
+}
+
+#pragma mark -  scrollView delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if(scrollView ==self.tableView){
+        if (vedioPlayer==nil) {
+            return;
+        }
+        
+        if (vedioPlayer.superview) {
+            CGRect rectInTableView = [self.tableView rectForRowAtIndexPath:currentIndexPath];
+            CGRect rectInSuperview = [self.tableView convertRect:rectInTableView toView:[self.tableView superview]];
+            if (rectInSuperview.origin.y<-self.currentCell.vedioBg.frame.size.height||rectInSuperview.origin.y>kScreenHeight-kNavbarHeight-kTabBarHeight) {//往上拖动
+                
+                if ([[UIApplication sharedApplication].keyWindow.subviews containsObject:vedioPlayer]&&isSmallScreen) {
+                    isSmallScreen = YES;
+                }else{
+                    //放widow上,小屏显示
+                    [self showSmallScreen];
+                }
+                
+            }else{
+                if ([self.currentCell.vedioBg.subviews containsObject:vedioPlayer]) {
+                    
+                }else{
+                    [self showCellCurrentVedioPlayer];
+                }
+            }
+        }
+        
+    }
+}
+
 
 @end
