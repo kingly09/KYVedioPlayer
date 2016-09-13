@@ -804,7 +804,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     }
 }
 
-#pragma mark KVO 监听
+#pragma mark - KVO 监听
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     /* AVPlayerItem "status" property value observer. */
     if (context == PlayViewStatusObservationContext)
