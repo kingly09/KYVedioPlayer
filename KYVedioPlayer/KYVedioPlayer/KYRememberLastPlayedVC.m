@@ -9,11 +9,10 @@
 #import "KYRememberLastPlayedVC.h"
 
 #define TheUserDefaults [NSUserDefaults standardUserDefaults]
-#define kHistoryTime @"HistoryTime"
 
 @interface KYRememberLastPlayedVC ()<KYVedioPlayerDelegate>{
     KYVedioPlayer  *vedioPlayer;
-//    CGRect     playerFrame;
+    CGRect     playerFrame;
     NSString *URLString;
 }
 
@@ -25,19 +24,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-
+    playerFrame = CGRectMake(0, 0, kScreenWidth, (kScreenWidth)*(0.75));
+    vedioPlayer = [[KYVedioPlayer alloc]initWithFrame:playerFrame];
+    vedioPlayer.delegate = self;
     
     URLString = @"http://static.tripbe.com/videofiles/20121214/9533522808.f4v.mp4";
-    if ([TheUserDefaults doubleForKey:kHistoryTime]) {//如果有存上次播放的时间点记录，直接跳到上次纪录时间点播放
-        double time = [TheUserDefaults doubleForKey:kHistoryTime];
+    if ([TheUserDefaults doubleForKey:URLString]) {//如果有存上次播放的时间点记录，直接跳到上次纪录时间点播放
+        double time = [TheUserDefaults doubleForKey:URLString];
         vedioPlayer.seekTime = time;
     }
+    [vedioPlayer setURLString:URLString];
 
-    vedioPlayer.URLString = URLString;
-    vedioPlayer.delegate = self;
-    vedioPlayer.closeBtn.hidden = YES;
+    vedioPlayer.titleLabel.text = self.title;
+    vedioPlayer.closeBtn.hidden = NO;
+    vedioPlayer.progressColor = [UIColor orangeColor];
     [self.view addSubview:vedioPlayer];
-    
     [vedioPlayer play];
 
 }
@@ -79,8 +80,8 @@
 - (void)dealloc
 {
     //记录播放的时间
-    double currentTime = [vedioPlayer currentTime];
-    [TheUserDefaults setDouble:currentTime forKey:@"sdsd"];
+    double time = [vedioPlayer currentTime];
+    [TheUserDefaults setDouble:time forKey:URLString];
     
     [self releasePlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
