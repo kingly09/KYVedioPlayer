@@ -311,12 +311,14 @@
         vedioPlayer = [[KYVedioPlayer alloc]initWithFrame:cell.vedioBg.bounds];
         vedioPlayer.delegate = self;
         vedioPlayer.closeBtnStyle = CloseBtnStyleClose;
+        vedioPlayer.titleLabel.text = video.title;
         vedioPlayer.URLString = video.video;
     }else{
         
         vedioPlayer = [[KYVedioPlayer alloc]initWithFrame:cell.vedioBg.bounds];
         vedioPlayer.delegate = self;
         vedioPlayer.closeBtnStyle = CloseBtnStyleClose;
+        vedioPlayer.titleLabel.text = video.title;
         vedioPlayer.URLString = video.video;
     }
     

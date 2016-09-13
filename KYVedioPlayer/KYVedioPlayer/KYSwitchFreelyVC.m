@@ -213,7 +213,7 @@
     [vedioPlayer removeFromSuperview];
     [UIView animateWithDuration:0.5f animations:^{
         vedioPlayer.transform = CGAffineTransformIdentity;
-        vedioPlayer.frame = CGRectMake(kScreenWidth/2,kScreenHeight-kTabBarHeight-(kScreenWidth/2)*0.75, kScreenWidth/2, (kScreenWidth/2)*0.75);
+        vedioPlayer.frame = CGRectMake(kScreenWidth/2,kScreenHeight-kNavbarHeight-(kScreenWidth/2)*0.75, kScreenWidth/2, (kScreenWidth/2)*0.75);
         vedioPlayer.playerLayer.frame =  vedioPlayer.bounds;
         [[UIApplication sharedApplication].keyWindow addSubview:vedioPlayer];
         [vedioPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -413,12 +413,14 @@
         vedioPlayer = [[KYVedioPlayer alloc]initWithFrame:cell.vedioBg.bounds];
         vedioPlayer.delegate = self;
         vedioPlayer.closeBtnStyle = CloseBtnStyleClose;
+        vedioPlayer.titleLabel.text = video.title;
         vedioPlayer.URLString = video.video;
     }else{
         
         vedioPlayer = [[KYVedioPlayer alloc]initWithFrame:cell.vedioBg.bounds];
         vedioPlayer.delegate = self;
         vedioPlayer.closeBtnStyle = CloseBtnStyleClose;
+        vedioPlayer.titleLabel.text = video.title;
         vedioPlayer.URLString = video.video;
     }
     
