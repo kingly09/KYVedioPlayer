@@ -7,6 +7,7 @@
 //
 
 #import "KYBaseViewController.h"
+#import "KYVideo.h"
 
 @interface KYBaseViewController ()
 
@@ -25,14 +26,60 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+/**
+ *  获得视频列表
+ **/
+- (void)getVideoListWithURLString:(NSString *)URLString  success:(onSuccess)success failed:(onFailed)failed{
+    dispatch_queue_t global_t = dispatch_get_global_queue(0, 0);
+    dispatch_async(global_t, ^{
+        NSURL *url = [NSURL URLWithString:URLString];
+        NSMutableArray *listArray = [NSMutableArray array];
+        [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:url] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * response, NSData *  data, NSError *  connectionError) {
+            if (connectionError) {
+                NSLog(@"错误%@",connectionError);
+                failed(connectionError);
+            }else{
+                NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                NSArray *videoList = [dict objectForKey:@"videoList"];
+                for (NSDictionary * video in videoList) {
+                    KYVideo * model = [[KYVideo alloc] init];
+                    model.title = [video objectForKey:@"title"];
+                    model.image = [video objectForKey:@"cover"];
+                    model.video = [video objectForKey:@"m3u8_url"];
+                    [listArray addObject:model];
+                }
+                success(listArray);
+            }
+            
+        }];
+        
+    });
+    
 }
-*/
+
+- (void)addProgressHUD{
+
+    if (!_progressHUD) {
+        _progressHUD=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    }
+}
+- (void)addProgressHUDWithMessage:(NSString*)message{
+
+    if (!_progressHUD)
+    {
+        _progressHUD=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        _progressHUD.label.text=message;
+    }
+    
+}
+
+- (void)removeProgressHUD{
+    
+    if (_progressHUD) {
+        [_progressHUD removeFromSuperview];
+        _progressHUD=nil;
+    }
+}
+
 
 @end

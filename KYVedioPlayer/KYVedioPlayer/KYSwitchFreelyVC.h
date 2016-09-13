@@ -10,4 +10,8 @@
 
 @interface KYSwitchFreelyVC : KYBaseViewController
 
+
+
+
+
 @end

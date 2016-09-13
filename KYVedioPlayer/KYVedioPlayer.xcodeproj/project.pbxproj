@@ -13,6 +13,7 @@
 		BC22D6461D826504007F040A /* KYRememberLastPlayedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D6451D826504007F040A /* KYRememberLastPlayedVC.m */; };
 		BC22D6491D826548007F040A /* KYSwitchFreelyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D6481D826548007F040A /* KYSwitchFreelyVC.m */; };
 		BC22D64E1D829225007F040A /* KYVedioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D64D1D829225007F040A /* KYVedioPlayer.m */; };
+		BC27A9111D87E57C00D3B619 /* MBProgressHUD+Show.m in Sources */ = {isa = PBXBuildFile; fileRef = BC27A9101D87E57C00D3B619 /* MBProgressHUD+Show.m */; };
 		BC4CE87B1D815D8D00E6475C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE87A1D815D8D00E6475C /* main.m */; };
 		BC4CE87E1D815D8D00E6475C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE87D1D815D8D00E6475C /* AppDelegate.m */; };
 		BC4CE8811D815D8D00E6475C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE8801D815D8D00E6475C /* ViewController.m */; };
@@ -61,6 +62,8 @@
 		BC22D6481D826548007F040A /* KYSwitchFreelyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYSwitchFreelyVC.m; sourceTree = "<group>"; };
 		BC22D64C1D829225007F040A /* KYVedioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYVedioPlayer.h; sourceTree = "<group>"; };
 		BC22D64D1D829225007F040A /* KYVedioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYVedioPlayer.m; sourceTree = "<group>"; };
+		BC27A90F1D87E57C00D3B619 /* MBProgressHUD+Show.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Show.h"; sourceTree = "<group>"; };
+		BC27A9101D87E57C00D3B619 /* MBProgressHUD+Show.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Show.m"; sourceTree = "<group>"; };
 		BC4CE8761D815D8D00E6475C /* KYVedioPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KYVedioPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC4CE87A1D815D8D00E6475C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BC4CE87C1D815D8D00E6475C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -170,6 +173,8 @@
 			children = (
 				BC4CE87C1D815D8D00E6475C /* AppDelegate.h */,
 				BC4CE87D1D815D8D00E6475C /* AppDelegate.m */,
+				BC27A90F1D87E57C00D3B619 /* MBProgressHUD+Show.h */,
+				BC27A9101D87E57C00D3B619 /* MBProgressHUD+Show.m */,
 				BC4CE8BA1D8163D500E6475C /* KYVedioPlayer_PrefixHeader.pch */,
 				BCD8E9731D83F01600EC2F04 /* Model */,
 				BC22D63D1D82600B007F040A /* TableViewCell */,
@@ -442,6 +447,7 @@
 				BC22D6401D826440007F040A /* KYNetworkVideoCellPlayVC.m in Sources */,
 				BC22D64E1D829225007F040A /* KYVedioPlayer.m in Sources */,
 				BC4CE8811D815D8D00E6475C /* ViewController.m in Sources */,
+				BC27A9111D87E57C00D3B619 /* MBProgressHUD+Show.m in Sources */,
 				BC5C9E321D8641530029005C /* KYNetworkVideoCell.m in Sources */,
 				BC22D6491D826548007F040A /* KYSwitchFreelyVC.m in Sources */,
 				BC22D6431D8264C3007F040A /* KYLocalVideoPlayVC.m in Sources */,
