@@ -310,6 +310,63 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 
 }
 
+#pragma mark - 重置播放器 或 销毁
+/**
+ * 重置播放器
+ */
+- (void)resetKYVedioPlayer{
+    
+    self.currentItem = nil;
+    self.seekTime = 0;
+    // 移除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    // 关闭定时器
+    if ([self.autoDismissTimer isValid]) {
+        [self.autoDismissTimer invalidate];
+        self.autoDismissTimer = nil;
+    }
+    self.playOrPauseBtn = nil;
+    // 暂停
+    [self.player pause];
+    // 移除原来的layer
+    [self.playerLayer removeFromSuperlayer];
+    // 替换PlayerItem为nil
+    [self.player replaceCurrentItemWithPlayerItem:nil];
+    // 把player置为nil
+    self.playerLayer = nil;
+    self.player = nil;
+    
+}
+
+
+-(void)dealloc{
+    
+    NSLog(@"KYVedioPlayer dealloc");
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.player.currentItem cancelPendingSeeks];
+    [self.player.currentItem.asset cancelLoading];
+    [self.player pause];
+    
+    [self.player removeTimeObserver:self.playbackTimeObserver];
+    
+    //移除观察者
+    [_currentItem removeObserver:self forKeyPath:@"status"];
+    [_currentItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
+    [_currentItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
+    [_currentItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
+    
+    
+    [self.playerLayer removeFromSuperlayer];
+    [self.player replaceCurrentItemWithPlayerItem:nil];
+    self.player = nil;
+    self.currentItem = nil;
+    self.playOrPauseBtn = nil;
+    self.playerLayer = nil;
+    
+    self.autoDismissTimer = nil;
+    
+}
+
 #pragma mark - lazy 加载失败的label
 -(UILabel *)loadFailedLabel{
     if (_loadFailedLabel==nil) {
@@ -1154,61 +1211,6 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         
     }];
 }
-#pragma mark - 重置播放器 或 销毁
-/**
- * 重置播放器
- */
-- (void )resetKYVedioPlayer{
 
-    self.currentItem = nil;
-    self.seekTime = 0;
-    // 移除通知
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    // 关闭定时器
-    if ([self.autoDismissTimer isValid]) {
-        [self.autoDismissTimer invalidate];
-        self.autoDismissTimer = nil;
-    }
-    self.playOrPauseBtn = nil;
-    // 暂停
-    [self.player pause];
-    // 移除原来的layer
-    [self.playerLayer removeFromSuperlayer];
-    // 替换PlayerItem为nil
-    [self.player replaceCurrentItemWithPlayerItem:nil];
-    // 把player置为nil
-    self.playerLayer = nil;
-    self.player = nil;
-    
-}
-
-
--(void)dealloc{
-    
-    NSLog(@"KYVedioPlayer dealloc");
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self.player.currentItem cancelPendingSeeks];
-    [self.player.currentItem.asset cancelLoading];
-    [self.player pause];
-    
-    [self.player removeTimeObserver:self.playbackTimeObserver];
-    
-    //移除观察者
-    [_currentItem removeObserver:self forKeyPath:@"status"];
-    [_currentItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
-    [_currentItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
-    [_currentItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
-    
-    
-    [self.playerLayer removeFromSuperlayer];
-    [self.player replaceCurrentItemWithPlayerItem:nil];
-    self.player = nil;
-    self.currentItem = nil;
-    self.playOrPauseBtn = nil;
-    self.playerLayer = nil;
-    
-    self.autoDismissTimer = nil;
-    
-}
 
 @end

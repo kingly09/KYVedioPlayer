@@ -12,8 +12,7 @@
 @interface KYNetworkVideoCell(){
 
     UILabel *title;
-    UIImageView *vedioBg;
-    UIButton *playBtn;
+
 }
 @end
 
@@ -48,25 +47,25 @@
         title.numberOfLines = 0;
         title.contentMode= UIViewContentModeTop;
         [self.contentView  addSubview:title];
-        
+    
 
-        vedioBg= [[UIImageView alloc]init];
-        vedioBg.contentMode = UIViewContentModeScaleToFill;
-        vedioBg.userInteractionEnabled = YES;
+        _vedioBg= [[UIImageView alloc]init];
+        _vedioBg.contentMode = UIViewContentModeScaleToFill;
+        _vedioBg.userInteractionEnabled = YES;
         UITapGestureRecognizer *panGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(vedioBgTapGesture:)];
-        vedioBg.userInteractionEnabled = YES;
-        [vedioBg addGestureRecognizer:panGesture];
-        [self.contentView  addSubview:vedioBg];
+        _vedioBg.userInteractionEnabled = YES;
+        [_vedioBg addGestureRecognizer:panGesture];
+        [self.contentView  addSubview:_vedioBg];
+    
         
-        
-        playBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [playBtn setImage:[UIImage imageNamed:@"video_cover_play_nor"]  forState:UIControlStateNormal];
-        [playBtn adjustsImageWhenHighlighted];
-        [playBtn adjustsImageWhenDisabled];
-        playBtn.backgroundColor = [UIColor clearColor];
-        playBtn.imageView.contentMode = UIViewContentModeCenter;
-        [playBtn addTarget:self action:@selector(onClickVideoPlay:) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView  addSubview:playBtn];
+        _playBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_playBtn setImage:[UIImage imageNamed:@"video_cover_play_nor"]  forState:UIControlStateNormal];
+        [_playBtn adjustsImageWhenHighlighted];
+        [_playBtn adjustsImageWhenDisabled];
+        _playBtn.backgroundColor = [UIColor clearColor];
+        _playBtn.imageView.contentMode = UIViewContentModeCenter;
+        [_playBtn addTarget:self action:@selector(onClickVideoPlay:) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView  addSubview:_playBtn];
 
 }
 
@@ -81,10 +80,10 @@
         
         title.text  = _video.title;
         title.frame = CGRectMake(kVerticalSpace, 0 , kScreenWidth - kVerticalSpace*2, 30);
-        vedioBg.frame =  CGRectMake(0, title.frame.size.height , kScreenWidth,200);
-        [vedioBg sd_setImageWithURL:[NSURL URLWithString:video.image] placeholderImage:[UIImage imageNamed:@"PlayerBackground"]];
-        playBtn.frame = CGRectMake((kScreenWidth - 72)/2, title.frame.size.height+ (vedioBg.frame.size.height - 72)/2  , 72, 72);
-        _video.curCellHeight = vedioBg.frame.origin.y + vedioBg.frame.size.height;
+        _vedioBg.frame =  CGRectMake(0, title.frame.size.height , kScreenWidth,200);
+        [_vedioBg sd_setImageWithURL:[NSURL URLWithString:video.image] placeholderImage:[UIImage imageNamed:@"PlayerBackground"]];
+        _playBtn.frame = CGRectMake((kScreenWidth - 72)/2, title.frame.size.height+ (_vedioBg.frame.size.height - 72)/2  , 72, 72);
+        _video.curCellHeight = 230;
         
     }
 }
@@ -103,11 +102,11 @@
 
 }
 
--(void)onClickVideoPlay:(id)sender{
+-(void)onClickVideoPlay:(UIButton *)sender{
 
     _video.indexPath = _indexPath;
-    if (_mydelegate && [_mydelegate respondsToSelector:@selector(networkVideoCellOnClickVideoPlay:)]) {
-        [_mydelegate networkVideoCellOnClickVideoPlay:_video];
+    if (_mydelegate && [_mydelegate respondsToSelector:@selector(networkVideoCellOnClickVideoPlay:withVideoPlayBtn:)]) {
+        [_mydelegate networkVideoCellOnClickVideoPlay:_video withVideoPlayBtn:sender];
     }
 }
 

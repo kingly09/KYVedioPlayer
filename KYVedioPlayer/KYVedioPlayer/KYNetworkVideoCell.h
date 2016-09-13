@@ -16,6 +16,9 @@
 @property (nonatomic,weak) id<KYNetworkVideoCellDelegate>mydelegate;
 
 +(NSString *) cellReuseIdentifier;
+
+@property (nonatomic, strong)  UIImageView *vedioBg;
+@property (nonatomic, strong)   UIButton *playBtn;
 @property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic,strong) KYVideo *video;
 
@@ -27,6 +30,6 @@
 
 -(void)networkVideoCellVedioBgTapGesture:(KYVideo *)video;
 
--(void)networkVideoCellOnClickVideoPlay:(KYVideo *)video;
+-(void)networkVideoCellOnClickVideoPlay:(KYVideo *)video withVideoPlayBtn:(UIButton *)videoPlayBtn;
 
 @end

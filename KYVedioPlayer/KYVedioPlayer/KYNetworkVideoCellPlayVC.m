@@ -20,6 +20,7 @@
 @implementation KYNetworkVideoCellPlayVC{
 
      KYVedioPlayer *vedioPlayer;
+     KYVideo *currentVideo;
      NSIndexPath *currentIndexPath;
 }
 
@@ -46,12 +47,66 @@
     }
 }
 
--(KYNetworkVideoCell *)currentTableCell{
+-(KYNetworkVideoCell *)currentCell{
     if (currentIndexPath==nil) {
         return nil;
     }
     KYNetworkVideoCell *currentCell = (KYNetworkVideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndexPath.row inSection:0]];
     return currentCell;
+}
+
+/**
+ * 显示 从全屏来当前的cell视频
+ **/
+-(void)showCellCurrentVedioPlayer{
+    
+    if (currentVideo != nil &&  currentIndexPath != nil) {
+        
+        KYNetworkVideoCell *currentCell = [self currentCell];
+        [vedioPlayer removeFromSuperview];
+        
+        [UIView animateWithDuration:0.5f animations:^{
+            vedioPlayer.transform = CGAffineTransformIdentity;
+            vedioPlayer.frame = currentCell.vedioBg.bounds;
+            vedioPlayer.playerLayer.frame =  vedioPlayer.bounds;
+            [currentCell.vedioBg addSubview:vedioPlayer];
+            [currentCell.vedioBg bringSubviewToFront:vedioPlayer];
+            [vedioPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(vedioPlayer).with.offset(0);
+                make.right.equalTo(vedioPlayer).with.offset(0);
+                make.height.mas_equalTo(40);
+                make.bottom.equalTo(vedioPlayer).with.offset(0);
+            }];
+            [vedioPlayer.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(vedioPlayer).with.offset(0);
+                make.right.equalTo(vedioPlayer).with.offset(0);
+                make.height.mas_equalTo(40);
+                make.top.equalTo(vedioPlayer).with.offset(0);
+            }];
+            [vedioPlayer.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(vedioPlayer.topView).with.offset(45);
+                make.right.equalTo(vedioPlayer.topView).with.offset(-45);
+                make.center.equalTo(vedioPlayer.topView);
+                make.top.equalTo(vedioPlayer.topView).with.offset(0);
+            }];
+            [vedioPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(vedioPlayer).with.offset(5);
+                make.height.mas_equalTo(30);
+                make.width.mas_equalTo(30);
+                make.top.equalTo(vedioPlayer).with.offset(5);
+            }];
+            [vedioPlayer.loadFailedLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.center.equalTo(vedioPlayer);
+                make.width.equalTo(vedioPlayer);
+                make.height.equalTo(@30);
+            }];
+        }completion:^(BOOL finished) {
+            vedioPlayer.isFullscreen = NO;
+            [self setNeedsStatusBarAppearanceUpdate];
+            vedioPlayer.fullScreenBtn.selected = NO;
+            
+        }];
+    }
 }
 
 
@@ -158,21 +213,26 @@
     cell.indexPath = indexPath;
     cell.video = kYVideo;
     cell.mydelegate = self;
+    cell.playBtn.tag = indexPath.row;
     
     if (vedioPlayer && vedioPlayer.superview) {
-       
+        if (indexPath.row == currentIndexPath.row) {
+            [cell.playBtn.superview sendSubviewToBack:cell.playBtn];    //隐藏播放按钮
+        }else{
+            [cell.playBtn.superview bringSubviewToFront:cell.playBtn];  //显示播放按钮
+        }
         NSArray *indexpaths = [tableView indexPathsForVisibleRows];
-        if (![indexpaths containsObject:currentIndexPath]&&currentIndexPath!=nil) {//复用
+        if (![indexpaths containsObject:currentIndexPath] && currentIndexPath!=nil) { //复用机制
             
             if ([[UIApplication sharedApplication].keyWindow.subviews containsObject:vedioPlayer]) {
                 vedioPlayer.hidden = NO;
             }else{
                 vedioPlayer.hidden = YES;
+                [cell.playBtn.superview bringSubviewToFront:cell.playBtn];
             }
         }else{
-            if ([cell.contentView.subviews containsObject:vedioPlayer]) {
-                [cell.contentView addSubview:vedioPlayer];
-                
+            if ([cell.vedioBg.subviews containsObject:vedioPlayer]) {  //当滑倒所属当前视频的时候自动播放
+                [cell.vedioBg addSubview:vedioPlayer];
                 [vedioPlayer play];
                 vedioPlayer.hidden = NO;
             }
@@ -231,29 +291,56 @@
 
 }
 
--(void)networkVideoCellOnClickVideoPlay:(KYVideo *)video{
-    currentIndexPath = video.indexPath;
+-(void)networkVideoCellOnClickVideoPlay:(KYVideo *)video withVideoPlayBtn:(UIButton *)videoPlayBtn;{
 
-    KYNetworkVideoCell *cell = (KYNetworkVideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:video.indexPath.row inSection:video.indexPath.section]];
+    [self closeCurrentCellVedioPlayer];
+    
+    currentVideo = video;
+    currentIndexPath = [NSIndexPath indexPathForRow:videoPlayBtn.tag inSection:0];
+    KYNetworkVideoCell *cell =nil;
+    if ([UIDevice currentDevice].systemVersion.floatValue>=8||[UIDevice currentDevice].systemVersion.floatValue<7) {
+        cell = (KYNetworkVideoCell *)videoPlayBtn.superview.superview;
+        
+    }else{//ios7系统 UITableViewCell上多了一个层级UITableViewCellScrollView
+        cell = (KYNetworkVideoCell *)videoPlayBtn.superview.superview.subviews;
+        
+    }
     
     if (vedioPlayer) {
         [self releasePlayer];
-         vedioPlayer = [[KYVedioPlayer alloc]initWithFrame:cell.contentView.bounds];
-         vedioPlayer.delegate = self;
-         vedioPlayer.closeBtnStyle = CloseBtnStyleClose;
-         vedioPlayer.URLString = video.video;
+        vedioPlayer = [[KYVedioPlayer alloc]initWithFrame:cell.vedioBg.bounds];
+        vedioPlayer.delegate = self;
+        vedioPlayer.closeBtnStyle = CloseBtnStyleClose;
+        vedioPlayer.URLString = video.video;
     }else{
-    
-        vedioPlayer = [[KYVedioPlayer alloc]initWithFrame:cell.contentView.bounds];
+        
+        vedioPlayer = [[KYVedioPlayer alloc]initWithFrame:cell.vedioBg.bounds];
         vedioPlayer.delegate = self;
         vedioPlayer.closeBtnStyle = CloseBtnStyleClose;
         vedioPlayer.URLString = video.video;
     }
-    [cell.contentView addSubview:vedioPlayer];
-    [vedioPlayer play];
-    [self.tableView reloadData];
     
+    [cell.vedioBg addSubview:vedioPlayer];
+    [cell.vedioBg bringSubviewToFront:vedioPlayer];
+    [cell.playBtn.superview sendSubviewToBack:cell.playBtn];
+    [self.tableView reloadData];
+
+
 }
+/**
+ * 关闭当前cell 中的 视频
+ **/
+-(void)closeCurrentCellVedioPlayer{
+
+    if (currentVideo != nil &&  currentIndexPath != nil) {
+        
+        KYNetworkVideoCell *currentCell = [self currentCell];
+        [currentCell.playBtn.superview bringSubviewToFront:currentCell.playBtn];
+        [vedioPlayer removeFromSuperview];
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
+}
+
 
 #pragma mark - KYVedioPlayerDelegate 播放器委托方法
 //点击播放暂停按钮代理方法
@@ -265,10 +352,31 @@
 -(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer clickedCloseButton:(UIButton *)closeBtn{
     
     NSLog(@"[KYVedioPlayer] clickedCloseButton ");
+    
+    if (kyvedioPlayer.isFullscreen == YES) { //点击全屏模式下的关闭按钮
+        self.navigationController.navigationBarHidden = NO;
+        [self showCellCurrentVedioPlayer];
+    }else{
+        
+        [self closeCurrentCellVedioPlayer];
+    }
+
 }
 //点击全屏按钮代理方法
 -(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer clickedFullScreenButton:(UIButton *)fullScreenBtn{
     NSLog(@"[KYVedioPlayer] clickedFullScreenButton ");
+    
+    if (fullScreenBtn.isSelected) {//全屏显示
+        self.navigationController.navigationBarHidden = YES;
+        kyvedioPlayer.isFullscreen = YES;
+        [self setNeedsStatusBarAppearanceUpdate];
+        [kyvedioPlayer showFullScreenWithInterfaceOrientation:UIInterfaceOrientationLandscapeLeft player:kyvedioPlayer withFatherView:self.view];
+    }else{
+         self.navigationController.navigationBarHidden = NO;
+        [self showCellCurrentVedioPlayer];
+        
+    }
+
     
     
 }
@@ -297,11 +405,13 @@
 -(void)kyplayerFinishedPlay:(KYVedioPlayer *)kyvedioPlayer{
     
     NSLog(@"[KYVedioPlayer] kyvedioPlayerReadyToPlay  播放完毕");
-    if (vedioPlayer) {
-        [vedioPlayer removeFromSuperview];
-    }
+    
+    [self closeCurrentCellVedioPlayer];
+
     
 }
+
+
 
 /**
  *  注销播放器

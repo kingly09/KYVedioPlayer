@@ -161,7 +161,7 @@ typedef NS_ENUM(NSInteger, CloseBtnStyle){
 /**
  * 重置播放器
  */
-- (void )resetKYVedioPlayer;
+- (void)resetKYVedioPlayer;
 /**
  *  全屏显示播放
  ＊ @param interfaceOrientation 方向
