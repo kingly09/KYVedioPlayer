@@ -39,12 +39,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setUpView];
+    [self loadDataList];
     [self addMJRefresh];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self performSelector:@selector(loadDataList) withObject:nil afterDelay:1.0];
+    
 }
 
 -(void)loadDataList{
