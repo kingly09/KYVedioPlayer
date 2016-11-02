@@ -67,11 +67,11 @@ typedef NS_ENUM(NSInteger, CloseBtnStyle){
 /**
  *  播放器player
  */
-@property (nonatomic,retain ) AVPlayer       *player;
+@property (nonatomic,retain,nullable) AVPlayer       *player;
 /**
  *playerLayer,可以修改frame
  */
-@property (nonatomic,retain ) AVPlayerLayer  *playerLayer;
+@property (nonatomic,retain,nullable) AVPlayerLayer  *playerLayer;
 
 /** 播放器的代理 */
 @property (nonatomic, weak)id <KYVedioPlayerDelegate> delegate;
@@ -99,7 +99,7 @@ typedef NS_ENUM(NSInteger, CloseBtnStyle){
 /**
  *  定时器
  */
-@property (nonatomic, retain) NSTimer        *autoDismissTimer;
+@property (nonatomic, retain,nullable) NSTimer        *autoDismissTimer;
 /**
  *  BOOL值判断是否自动隐藏底部视图,默认是自动隐藏
  */
@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, CloseBtnStyle){
 /**
  *  播放暂停按钮
  */
-@property (nonatomic,retain ) UIButton       *playOrPauseBtn;
+@property (nonatomic,retain,nullable) UIButton       *playOrPauseBtn;
 /**
  *  左上角关闭按钮
  */
@@ -127,7 +127,7 @@ typedef NS_ENUM(NSInteger, CloseBtnStyle){
 /**
  *  当前播放的item
  */
-@property (nonatomic, retain) AVPlayerItem   *currentItem;
+@property (nonatomic, retain,nullable)   AVPlayerItem   *currentItem;
 /**
  *  菊花（加载框）
  */

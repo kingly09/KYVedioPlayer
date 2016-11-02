@@ -12,8 +12,8 @@
 		BC22D6431D8264C3007F040A /* KYLocalVideoPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D6421D8264C3007F040A /* KYLocalVideoPlayVC.m */; };
 		BC22D6461D826504007F040A /* KYRememberLastPlayedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D6451D826504007F040A /* KYRememberLastPlayedVC.m */; };
 		BC22D6491D826548007F040A /* KYSwitchFreelyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D6481D826548007F040A /* KYSwitchFreelyVC.m */; };
-		BC22D64E1D829225007F040A /* KYVedioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D64D1D829225007F040A /* KYVedioPlayer.m */; };
 		BC27A9111D87E57C00D3B619 /* MBProgressHUD+Show.m in Sources */ = {isa = PBXBuildFile; fileRef = BC27A9101D87E57C00D3B619 /* MBProgressHUD+Show.m */; };
+		BC415DB61DC9BA520059B2C6 /* KYVedioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC415DB51DC9BA520059B2C6 /* KYVedioPlayer.m */; };
 		BC4CE87B1D815D8D00E6475C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE87A1D815D8D00E6475C /* main.m */; };
 		BC4CE87E1D815D8D00E6475C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE87D1D815D8D00E6475C /* AppDelegate.m */; };
 		BC4CE8811D815D8D00E6475C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE8801D815D8D00E6475C /* ViewController.m */; };
@@ -60,10 +60,10 @@
 		BC22D6451D826504007F040A /* KYRememberLastPlayedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYRememberLastPlayedVC.m; sourceTree = "<group>"; };
 		BC22D6471D826548007F040A /* KYSwitchFreelyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYSwitchFreelyVC.h; sourceTree = "<group>"; };
 		BC22D6481D826548007F040A /* KYSwitchFreelyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYSwitchFreelyVC.m; sourceTree = "<group>"; };
-		BC22D64C1D829225007F040A /* KYVedioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYVedioPlayer.h; sourceTree = "<group>"; };
-		BC22D64D1D829225007F040A /* KYVedioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYVedioPlayer.m; sourceTree = "<group>"; };
 		BC27A90F1D87E57C00D3B619 /* MBProgressHUD+Show.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Show.h"; sourceTree = "<group>"; };
 		BC27A9101D87E57C00D3B619 /* MBProgressHUD+Show.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Show.m"; sourceTree = "<group>"; };
+		BC415DB41DC9BA520059B2C6 /* KYVedioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYVedioPlayer.h; sourceTree = "<group>"; };
+		BC415DB51DC9BA520059B2C6 /* KYVedioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYVedioPlayer.m; sourceTree = "<group>"; };
 		BC4CE8761D815D8D00E6475C /* KYVedioPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KYVedioPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC4CE87A1D815D8D00E6475C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BC4CE87C1D815D8D00E6475C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -146,6 +146,16 @@
 			name = TableViewCell;
 			sourceTree = "<group>";
 		};
+		BC415DB31DC9BA520059B2C6 /* KYVedioPlayerLib */ = {
+			isa = PBXGroup;
+			children = (
+				BC415DB41DC9BA520059B2C6 /* KYVedioPlayer.h */,
+				BC415DB51DC9BA520059B2C6 /* KYVedioPlayer.m */,
+			);
+			name = KYVedioPlayerLib;
+			path = ../../KYVedioPlayerLib;
+			sourceTree = "<group>";
+		};
 		BC4CE86D1D815D8D00E6475C = {
 			isa = PBXGroup;
 			children = (
@@ -171,10 +181,9 @@
 		BC4CE8781D815D8D00E6475C /* KYVedioPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				BC415DB31DC9BA520059B2C6 /* KYVedioPlayerLib */,
 				BC4CE87C1D815D8D00E6475C /* AppDelegate.h */,
 				BC4CE87D1D815D8D00E6475C /* AppDelegate.m */,
-				BC27A90F1D87E57C00D3B619 /* MBProgressHUD+Show.h */,
-				BC27A9101D87E57C00D3B619 /* MBProgressHUD+Show.m */,
 				BC4CE8BA1D8163D500E6475C /* KYVedioPlayer_PrefixHeader.pch */,
 				BCD8E9731D83F01600EC2F04 /* Model */,
 				BC22D63D1D82600B007F040A /* TableViewCell */,
@@ -187,8 +196,6 @@
 				BC4CE88D1D815D8D00E6475C /* Info.plist */,
 				BC4CE8851D815D8D00E6475C /* KYVedioPlayer.xcdatamodeld */,
 				BC4CE8791D815D8D00E6475C /* Supporting Files */,
-				BC22D64C1D829225007F040A /* KYVedioPlayer.h */,
-				BC22D64D1D829225007F040A /* KYVedioPlayer.m */,
 			);
 			path = KYVedioPlayer;
 			sourceTree = "<group>";
@@ -222,6 +229,8 @@
 		BC4CE8AF1D81615200E6475C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				BC27A90F1D87E57C00D3B619 /* MBProgressHUD+Show.h */,
+				BC27A9101D87E57C00D3B619 /* MBProgressHUD+Show.m */,
 				BC4CE8B71D81638200E6475C /* KYBaseViewController.h */,
 				BC4CE8B81D81638200E6475C /* KYBaseViewController.m */,
 				BC4CE87F1D815D8D00E6475C /* ViewController.h */,
@@ -445,9 +454,9 @@
 				BC4CE8B91D81638200E6475C /* KYBaseViewController.m in Sources */,
 				BC22D6461D826504007F040A /* KYRememberLastPlayedVC.m in Sources */,
 				BC22D6401D826440007F040A /* KYNetworkVideoCellPlayVC.m in Sources */,
-				BC22D64E1D829225007F040A /* KYVedioPlayer.m in Sources */,
 				BC4CE8811D815D8D00E6475C /* ViewController.m in Sources */,
 				BC27A9111D87E57C00D3B619 /* MBProgressHUD+Show.m in Sources */,
+				BC415DB61DC9BA520059B2C6 /* KYVedioPlayer.m in Sources */,
 				BC5C9E321D8641530029005C /* KYNetworkVideoCell.m in Sources */,
 				BC22D6491D826548007F040A /* KYSwitchFreelyVC.m in Sources */,
 				BC22D6431D8264C3007F040A /* KYLocalVideoPlayVC.m in Sources */,
