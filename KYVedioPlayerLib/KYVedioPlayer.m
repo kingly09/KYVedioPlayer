@@ -8,18 +8,6 @@
 
 #import "KYVedioPlayer.h"
 
-#define kScreenWidth [[UIScreen mainScreen]bounds].size.width //屏幕宽度
-#define kScreenHeight [[UIScreen mainScreen]bounds].size.height //屏幕高度
-#define kStatusBarHeight ([[UIApplication sharedApplication]statusBarFrame].size.height)//状态栏高度
-#define kNavgationBarHeight (64.0f) //NavgationBar的高度
-
-#define kDeviceVersion [[UIDevice currentDevice].systemVersion floatValue]
-#define WS(weakSelf) __weak __typeof(&*self)weakSelf = self;
-
-#define kNavbarHeight ((kDeviceVersion>=7.0)? 64 :44 )
-#define kIOS7DELTA   ((kDeviceVersion>=7.0)? 20 :0 )
-#define kTabBarHeight 49
-
 #define kHalfWidth self.frame.size.width * 0.5
 #define kHalfHeight self.frame.size.height * 0.5
 
@@ -630,14 +618,6 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 -(void)fullScreenAction:(UIButton *)sender{
     sender.selected = !sender.selected;
 
-    if (sender.selected == YES) {
-
-        [self.fullScreenBtn setImage:[UIImage imageNamed:@"video_fullscreen_hl" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"video_fullscreen_hl" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
-    }else{
-
-        [self.fullScreenBtn setImage:[UIImage imageNamed:@"video_smallscreen_hl" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"video_smallscreen_hl" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
-    }
-
     if (self.delegate&&[self.delegate respondsToSelector:@selector(kyvedioPlayer:clickedFullScreenButton:)]) {
         [self.delegate kyvedioPlayer:self clickedFullScreenButton:sender];
     }
@@ -1152,18 +1132,18 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     }else if(interfaceOrientation==UIInterfaceOrientationLandscapeRight){
         player.transform = CGAffineTransformMakeRotation(M_PI_2);
     }
-    player.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-    player.playerLayer.frame =  CGRectMake(0,0, kScreenHeight,kScreenWidth);
+    player.frame = CGRectMake(0, 0, [[UIScreen mainScreen]bounds].size.width, [[UIScreen mainScreen]bounds].size.height);
+    player.playerLayer.frame =  CGRectMake(0,0, [[UIScreen mainScreen]bounds].size.height,[[UIScreen mainScreen]bounds].size.width);
 
     [player.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(40);
-        make.top.mas_equalTo(kScreenWidth-40);
-        make.width.mas_equalTo(kScreenHeight);
+        make.top.mas_equalTo([[UIScreen mainScreen]bounds].size.width-40);
+        make.width.mas_equalTo([[UIScreen mainScreen]bounds].size.height);
     }];
     [player.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(40);
         make.left.equalTo(player).with.offset(0);
-        make.width.mas_equalTo(kScreenHeight);
+        make.width.mas_equalTo([[UIScreen mainScreen]bounds].size.height);
     }];
     [player.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(player.topView).with.offset(5);
@@ -1179,12 +1159,12 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 
     }];
     [player.loadFailedLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(kScreenHeight);
-        make.center.mas_equalTo(CGPointMake(kScreenWidth/2-36, -(kScreenWidth/2)+36));
+        make.width.mas_equalTo([[UIScreen mainScreen]bounds].size.height);
+        make.center.mas_equalTo(CGPointMake([[UIScreen mainScreen]bounds].size.width/2-36, -([[UIScreen mainScreen]bounds].size.width/2)+36));
         make.height.equalTo(@30);
     }];
     [player.loadingView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(CGPointMake(kScreenWidth/2-37, -(kScreenWidth/2-37)));
+        make.center.mas_equalTo(CGPointMake([[UIScreen mainScreen]bounds].size.width/2-37, -([[UIScreen mainScreen]bounds].size.width/2-37)));
     }];
    [fatherView addSubview:player];
     player.fullScreenBtn.selected = YES;
