@@ -12,6 +12,7 @@ KYVedioPlayer 是基于AVPlayer的封装视频播放器,支持播放mp4、m3u8�
 - 使用 cocoaPods 管理第三方库， 如果电脑没有安装 cocoapods，请先安装 cocoapods。安装方式可参考：[最新版 CocoaPods 的安装流程](http://blog.sina.com.cn/s/blog_6ff6523d0102x8dq.html)
 
 - 项目中使用到的第三方库
+
 ```
     platform:ios,'7.0'
     target "KYVedioPlayer" do
