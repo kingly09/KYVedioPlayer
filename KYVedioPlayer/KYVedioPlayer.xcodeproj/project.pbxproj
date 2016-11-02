@@ -14,6 +14,8 @@
 		BC22D6491D826548007F040A /* KYSwitchFreelyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D6481D826548007F040A /* KYSwitchFreelyVC.m */; };
 		BC27A9111D87E57C00D3B619 /* MBProgressHUD+Show.m in Sources */ = {isa = PBXBuildFile; fileRef = BC27A9101D87E57C00D3B619 /* MBProgressHUD+Show.m */; };
 		BC415DB61DC9BA520059B2C6 /* KYVedioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC415DB51DC9BA520059B2C6 /* KYVedioPlayer.m */; };
+		BC415DC11DCA33B10059B2C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC4CE8881D815D8D00E6475C /* Assets.xcassets */; };
+		BC415DC31DCA387F0059B2C6 /* KYVedioPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BC415DC21DCA387F0059B2C6 /* KYVedioPlayer.bundle */; };
 		BC4CE87B1D815D8D00E6475C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE87A1D815D8D00E6475C /* main.m */; };
 		BC4CE87E1D815D8D00E6475C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE87D1D815D8D00E6475C /* AppDelegate.m */; };
 		BC4CE8811D815D8D00E6475C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE8801D815D8D00E6475C /* ViewController.m */; };
@@ -64,6 +66,9 @@
 		BC27A9101D87E57C00D3B619 /* MBProgressHUD+Show.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Show.m"; sourceTree = "<group>"; };
 		BC415DB41DC9BA520059B2C6 /* KYVedioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYVedioPlayer.h; sourceTree = "<group>"; };
 		BC415DB51DC9BA520059B2C6 /* KYVedioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYVedioPlayer.m; sourceTree = "<group>"; };
+		BC415DBB1DCA33A50059B2C6 /* KYVedioPlayer.bundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KYVedioPlayer.bundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC415DBD1DCA33A50059B2C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC415DC21DCA387F0059B2C6 /* KYVedioPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = KYVedioPlayer.bundle; sourceTree = "<group>"; };
 		BC4CE8761D815D8D00E6475C /* KYVedioPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KYVedioPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC4CE87A1D815D8D00E6475C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BC4CE87C1D815D8D00E6475C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -95,6 +100,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BC415DB81DCA33A50059B2C6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BC4CE8731D815D8D00E6475C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -149,11 +161,20 @@
 		BC415DB31DC9BA520059B2C6 /* KYVedioPlayerLib */ = {
 			isa = PBXGroup;
 			children = (
+				BC415DC21DCA387F0059B2C6 /* KYVedioPlayer.bundle */,
 				BC415DB41DC9BA520059B2C6 /* KYVedioPlayer.h */,
 				BC415DB51DC9BA520059B2C6 /* KYVedioPlayer.m */,
 			);
 			name = KYVedioPlayerLib;
 			path = ../../KYVedioPlayerLib;
+			sourceTree = "<group>";
+		};
+		BC415DBC1DCA33A50059B2C6 /* KYVedioPlayer.bundle */ = {
+			isa = PBXGroup;
+			children = (
+				BC415DBD1DCA33A50059B2C6 /* Info.plist */,
+			);
+			path = KYVedioPlayer.bundle;
 			sourceTree = "<group>";
 		};
 		BC4CE86D1D815D8D00E6475C = {
@@ -162,6 +183,7 @@
 				BC4CE8781D815D8D00E6475C /* KYVedioPlayer */,
 				BC4CE8951D815D8E00E6475C /* KYVedioPlayerTests */,
 				BC4CE8A01D815D8E00E6475C /* KYVedioPlayerUITests */,
+				BC415DBC1DCA33A50059B2C6 /* KYVedioPlayer.bundle */,
 				BC4CE8771D815D8D00E6475C /* Products */,
 				6A46C423142FA0CDDB6E7F78 /* Pods */,
 				503DD6E42C8E44B757643B38 /* Frameworks */,
@@ -174,6 +196,7 @@
 				BC4CE8761D815D8D00E6475C /* KYVedioPlayer.app */,
 				BC4CE8921D815D8E00E6475C /* KYVedioPlayerTests.xctest */,
 				BC4CE89D1D815D8E00E6475C /* KYVedioPlayerUITests.xctest */,
+				BC415DBB1DCA33A50059B2C6 /* KYVedioPlayer.bundle.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -269,6 +292,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BC415DBA1DCA33A50059B2C6 /* KYVedioPlayer.bundle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BC415DBE1DCA33A50059B2C6 /* Build configuration list for PBXNativeTarget "KYVedioPlayer.bundle" */;
+			buildPhases = (
+				BC415DB71DCA33A50059B2C6 /* Sources */,
+				BC415DB81DCA33A50059B2C6 /* Frameworks */,
+				BC415DB91DCA33A50059B2C6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KYVedioPlayer.bundle;
+			productName = KYVedioPlayer.bundle;
+			productReference = BC415DBB1DCA33A50059B2C6 /* KYVedioPlayer.bundle.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		BC4CE8751D815D8D00E6475C /* KYVedioPlayer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BC4CE8A61D815D8E00E6475C /* Build configuration list for PBXNativeTarget "KYVedioPlayer" */;
@@ -335,6 +375,11 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "https://github.com/kingly09/KYVedioPlayer kingly  inc .";
 				TargetAttributes = {
+					BC415DBA1DCA33A50059B2C6 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = V446K9WVQL;
+						ProvisioningStyle = Automatic;
+					};
 					BC4CE8751D815D8D00E6475C = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -364,11 +409,20 @@
 				BC4CE8751D815D8D00E6475C /* KYVedioPlayer */,
 				BC4CE8911D815D8E00E6475C /* KYVedioPlayerTests */,
 				BC4CE89C1D815D8E00E6475C /* KYVedioPlayerUITests */,
+				BC415DBA1DCA33A50059B2C6 /* KYVedioPlayer.bundle */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BC415DB91DCA33A50059B2C6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC415DC11DCA33B10059B2C6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BC4CE8741D815D8D00E6475C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -377,6 +431,7 @@
 				BC4CE8891D815D8D00E6475C /* Assets.xcassets in Resources */,
 				BC4CE8841D815D8D00E6475C /* Main.storyboard in Resources */,
 				BCD8E9781D84011D00EC2F04 /* 贝加尔湖畔.3gp in Resources */,
+				BC415DC31DCA387F0059B2C6 /* KYVedioPlayer.bundle in Resources */,
 				BCD8E9721D83E54D00EC2F04 /* test.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,6 +501,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BC415DB71DCA33A50059B2C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BC4CE8721D815D8D00E6475C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -518,6 +580,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		BC415DBF1DCA33A50059B2C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = NO;
+				DEVELOPMENT_TEAM = V446K9WVQL;
+				INFOPLIST_FILE = KYVedioPlayer.bundle/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kingly09.KYVedioPlayer-bundle";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		BC415DC01DCA33A50059B2C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = NO;
+				DEVELOPMENT_TEAM = V446K9WVQL;
+				INFOPLIST_FILE = KYVedioPlayer.bundle/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kingly09.KYVedioPlayer-bundle";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		BC4CE8A41D815D8E00E6475C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -679,6 +781,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BC415DBE1DCA33A50059B2C6 /* Build configuration list for PBXNativeTarget "KYVedioPlayer.bundle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC415DBF1DCA33A50059B2C6 /* Debug */,
+				BC415DC01DCA33A50059B2C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		BC4CE8711D815D8D00E6475C /* Build configuration list for PBXProject "KYVedioPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

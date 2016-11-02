@@ -9,6 +9,7 @@ s.platform     = :ios, "7.0"
 s.source       = { :git => "https://github.com/kingly09/KYVedioPlayer.git", :tag => s.version.to_s }
 s.social_media_url   = "https://github.com/kingly09"
 s.source_files = 'KYVedioPlayerLib/*.{h,m}'
+#s.resource = 'KYVedioPlayerLib/KYVedioPlayer.bundle'
 s.frameworks = "MediaPlayer", "AVFoundation", "UIKit"
 s.dependency "Masonry", "~> 1.0.1"
 s.requires_arc = true

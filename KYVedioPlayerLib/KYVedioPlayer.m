@@ -23,6 +23,13 @@
 #define kHalfWidth self.frame.size.width * 0.5
 #define kHalfHeight self.frame.size.height * 0.5
 
+#define MYBUNDLE_NAME @"KYVedioPlayer.bundle"
+
+#define MYBUNDLE_PATH [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:MYBUNDLE_NAME]
+
+#define MYBUNDLE [NSBundle bundleWithPath: MYBUNDLE_PATH]
+
+
 static void *PlayViewCMTimeValue = &PlayViewCMTimeValue;
 
 static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContext;
@@ -95,7 +102,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 
     self.seekTime = 0.00;
     self.isAutoDismissBottomView = YES;  //自动隐藏
-    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"PlayerBackground"]];
+    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"PlayerBackground" inBundle:MYBUNDLE compatibleWithTraitCollection:nil]];
 
     //添加loading视图
     self.loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -115,8 +122,14 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     self.playOrPauseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.playOrPauseBtn.showsTouchWhenHighlighted = YES;
     [self.playOrPauseBtn addTarget:self action:@selector(PlayOrPause:) forControlEvents:UIControlEventTouchUpInside];
-    [self.playOrPauseBtn setImage:[UIImage imageNamed:@"video_pause_nor"] ?: [UIImage imageNamed:@"video_pause_nor"] forState:UIControlStateNormal];
-    [self.playOrPauseBtn setImage:[UIImage imageNamed:@"video_play_nor"] ?: [UIImage imageNamed:@"video_play_nor"] forState:UIControlStateSelected];
+
+// xcassets加载图片
+//    UIImage *imgM = [UIImage imageNamed:@"video_play_nor" inBundle:MYBUNDLE compatibleWithTraitCollection:nil];
+//    [self.playOrPauseBtn setImage:imgM forState:UIControlStateNormal];
+
+    [self.playOrPauseBtn setImage:[UIImage imageNamed:@"video_pause_nor" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"video_pause_nor" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [self.playOrPauseBtn setImage:[UIImage imageNamed:@"video_play_nor" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"video_play_nor" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateSelected];
+
     [self.bottomView addSubview:self.playOrPauseBtn];
 
     //创建亮度的进度条
@@ -157,7 +170,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     //进度条
     self.progressSlider = [[UISlider alloc]init];
     self.progressSlider.minimumValue = 0.0;
-    [self.progressSlider setThumbImage:[UIImage imageNamed:@"ic_dot"] ?: [UIImage imageNamed:@"ic_dot"]  forState:UIControlStateNormal];
+    [self.progressSlider setThumbImage:[UIImage imageNamed:@"ic_dot" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"ic_dot" inBundle:MYBUNDLE compatibleWithTraitCollection:nil]  forState:UIControlStateNormal];
     self.progressSlider.maximumTrackTintColor = [UIColor clearColor];
     self.progressSlider.value = 0.0;//指定初始值
     //进度条的拖拽事件
@@ -182,8 +195,8 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     self.fullScreenBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.fullScreenBtn.showsTouchWhenHighlighted = YES;
     [self.fullScreenBtn addTarget:self action:@selector(fullScreenAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.fullScreenBtn setImage:[UIImage imageNamed:@"video_fullscreen_nor"] ?: [UIImage imageNamed:@"video_fullscreen_nor"] forState:UIControlStateNormal];
-    [self.fullScreenBtn setImage:[UIImage imageNamed:@"video_smallscreen_nor"] ?: [UIImage imageNamed:@"video_smallscreen_nor"] forState:UIControlStateSelected];
+    [self.fullScreenBtn setImage:[UIImage imageNamed:@"video_fullscreen_nor" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"video_fullscreen_nor" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [self.fullScreenBtn setImage:[UIImage imageNamed:@"video_smallscreen_nor" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"video_smallscreen_nor" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateSelected];
     [self.bottomView addSubview:self.fullScreenBtn];
 
     //左边时间
@@ -462,12 +475,14 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     self.state = KYVedioPlayerStateBuffering;
 
     if (self.closeBtnStyle==CloseBtnStylePop) {
-        [_closeBtn setImage:[UIImage imageNamed:@"video_nav_back_nor"] ?: [UIImage imageNamed:@"video_nav_back_nor"] forState:UIControlStateNormal];
-        [_closeBtn setImage:[UIImage imageNamed:@"video_nav_back_nor"] ?: [UIImage imageNamed:@"video_nav_back_nor"] forState:UIControlStateSelected];
+        [_closeBtn setImage:[UIImage imageNamed:@"video_nav_back_nor" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"video_nav_back_nor" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        [_closeBtn setImage:[UIImage imageNamed:@"video_nav_back_nor" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"video_nav_back_nor" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateSelected];
+        [_closeBtn setImage:[UIImage imageNamed:@"video_nav_back_hl" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"video_nav_back_hl" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
 
     }else{
-        [_closeBtn setImage:[UIImage imageNamed:@"ic_close"] ?: [UIImage imageNamed:@"ic_close"] forState:UIControlStateNormal];
-        [_closeBtn setImage:[UIImage imageNamed:@"ic_close"] ?: [UIImage imageNamed:@"ic_close"] forState:UIControlStateSelected];
+        [_closeBtn setImage:[UIImage imageNamed:@"ic_close" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"ic_close" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        [_closeBtn setImage:[UIImage imageNamed:@"ic_close" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"ic_close" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateSelected];
+        [_closeBtn setImage:[UIImage imageNamed:@"ic_close_p" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"ic_close_p" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
     }
 }
 /**
@@ -614,6 +629,15 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
  **/
 -(void)fullScreenAction:(UIButton *)sender{
     sender.selected = !sender.selected;
+
+    if (sender.selected == YES) {
+
+        [self.fullScreenBtn setImage:[UIImage imageNamed:@"video_fullscreen_hl" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"video_fullscreen_hl" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
+    }else{
+
+        [self.fullScreenBtn setImage:[UIImage imageNamed:@"video_smallscreen_hl" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"video_smallscreen_hl" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
+    }
+
     if (self.delegate&&[self.delegate respondsToSelector:@selector(kyvedioPlayer:clickedFullScreenButton:)]) {
         [self.delegate kyvedioPlayer:self clickedFullScreenButton:sender];
     }
