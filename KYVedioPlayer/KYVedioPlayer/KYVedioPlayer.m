@@ -63,6 +63,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
  */
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     [self initPlayer];
 }
 /**
