@@ -23,7 +23,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        
+
         [self addCellView];
     }
     return self;
@@ -31,14 +31,14 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
+
     // Configure the view for the selected state
 }
 
 - (void)addCellView
 {
-  
-        
+
+
         title = [[UILabel alloc]init];
         title.backgroundColor = [UIColor whiteColor];
         title.textAlignment = NSTextAlignmentLeft;
@@ -47,7 +47,7 @@
         title.numberOfLines = 0;
         title.contentMode= UIViewContentModeTop;
         [self.contentView  addSubview:title];
-    
+
 
         _vedioBg= [[UIImageView alloc]init];
         _vedioBg.contentMode = UIViewContentModeScaleToFill;
@@ -56,8 +56,8 @@
         _vedioBg.userInteractionEnabled = YES;
         [_vedioBg addGestureRecognizer:panGesture];
         [self.contentView  addSubview:_vedioBg];
-    
-        
+
+
         _playBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_playBtn setImage:[UIImage imageNamed:@"video_cover_play_nor"]  forState:UIControlStateNormal];
         [_playBtn adjustsImageWhenHighlighted];
@@ -77,25 +77,25 @@
     if (_video != video ) {
         _video = nil;
         _video = video;
-        
+
         title.text  = _video.title;
         title.frame = CGRectMake(kVerticalSpace, 0 , kScreenWidth - kVerticalSpace*2, 30);
         _vedioBg.frame =  CGRectMake(0, title.frame.size.height , kScreenWidth,200);
         [_vedioBg sd_setImageWithURL:[NSURL URLWithString:video.image] placeholderImage:[UIImage imageNamed:@"PlayerBackground"]];
         _playBtn.frame = CGRectMake((kScreenWidth - 72)/2, title.frame.size.height+ (_vedioBg.frame.size.height - 72)/2  , 72, 72);
         _video.curCellHeight = 230;
-        
+
     }
 }
 
 +(NSString *) cellReuseIdentifier{
-    
+
     return @"KKYNetworkVideoCell";
 }
 
 -(void)vedioBgTapGesture:(id)sender{
 
-    
+
     if (_mydelegate && [_mydelegate respondsToSelector:@selector(networkVideoCellVedioBgTapGesture:)]) {
         [_mydelegate networkVideoCellVedioBgTapGesture:_video];
     }

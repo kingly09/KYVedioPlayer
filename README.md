@@ -261,7 +261,7 @@ KYVedioPlayerStateFinished  | 播放完毕
 
 # 高级功能演示DEMO
 
-1. [支持UITableViewCell中播放视频](Docs/Cell_README.md)
+1.[记住上次播放的位置](Docs/RememberLast_README.md)
 
 每次记录播放器注销的时候的该视频的时间点，当下次在播放该视频的时候，先判断一下是否记录了该视频的时间点，如果记录了，就从记录的时间点开始播放，若没有，正常播放即可。
 
@@ -444,7 +444,9 @@ if ([TheUserDefaults doubleForKey:URLString]) {//如果有存上次播放的时�
 }
 ```
 
-2.[记住上次播放的位置](Docs/RememberLast_README.md)
+2.[支持UITableViewCell中播放视频](Docs/Cell_README.md)
+
+
 
 
 
