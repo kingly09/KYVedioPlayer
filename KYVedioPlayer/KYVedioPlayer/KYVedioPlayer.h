@@ -7,10 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+
+#if __has_include(<Masonry/Masonry.h>)
+#import <Masonry/Masonry.h>
+#else
 #import "Masonry.h"
+#endif
+
+NS_ASSUME_NONNULL_BEGIN
+
 @import MediaPlayer;
 @import AVFoundation;
 @import UIKit;
+
 
 // 播放器的几种状态
 typedef NS_ENUM(NSInteger, KYVedioPlayerState) {
@@ -178,3 +187,5 @@ typedef NS_ENUM(NSInteger, CloseBtnStyle){
 -(void)showSmallScreenWithPlayer:(KYVedioPlayer *)player withFatherView:(UIView *)fatherView withFrame:(CGRect )playerFrame;
 
 @end
+
+NS_ASSUME_NONNULL_END

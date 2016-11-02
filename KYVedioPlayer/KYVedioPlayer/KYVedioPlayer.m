@@ -8,6 +8,7 @@
 
 #import "KYVedioPlayer.h"
 
+
 #define kHalfWidth self.frame.size.width * 0.5
 #define kHalfHeight self.frame.size.height * 0.5
 
