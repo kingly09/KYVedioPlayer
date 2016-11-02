@@ -2,7 +2,7 @@
 
 KYVedioPlayer 是基于AVPlayer的封装视频播放器,支持播放mp4、m3u8、3gp、mov等格式；支持网络视频和本地视频播放；支持全屏和小屏幕播放；还在UITableViewCell中播放视频 ；支持横屏竖屏自动播放。
 
-![](https://github.com/kingly09/KYVedioPlayer/blob/master/vedio01.gif)
+![](https://raw.githubusercontent.com/kingly09/KYVedioPlayer/master/vedio01.gif)
 
 
 # 安装
@@ -259,11 +259,11 @@ KYVedioPlayerStateFinished  | 播放完毕
 
 ```
 
-# 高级功能演示
+# 高级功能演示DEMO
 
-* 支持UITableViewCell中播放视频；
+* [支持UITableViewCell中播放视频](Docs/Cell_README.md)
 
-* 记住上次播放的位置；
+* [记住上次播放的位置](Docs/RememberLast_README.md)
 
 
 
