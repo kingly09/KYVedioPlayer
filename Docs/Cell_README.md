@@ -8,6 +8,8 @@ KYVedioPlayer 使用高级教程 - 支持UITableViewCell中播放视频
 支持UITableViewCell中播放视频，当滑动视图的时候后，切换到小窗口播放，当滑到当前的cell视图时候，回来cell视图中播放，可以自由滑动切换视频连续播放。
 还可以随时点击切换横屏播放，小屏幕播放。
 
+![](https://raw.githubusercontent.com/kingly09/KYVedioPlayer/master/vedio03.gif)
+
 ## step 1 :首先创建一个 KYNetworkVideoCell视图
 
 **KYNetworkVideoCell.h**
@@ -585,6 +587,39 @@ cell播放：Layer是加载到cell上的背景图片区域的 滚动的时候要
 ## step 9 :  设置上下滚动的时候根据坐标切换cell显示还是小窗显示
 
 
+```
+#pragma mark -  scrollView delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if(scrollView ==self.tableView){
+        if (vedioPlayer==nil) {
+            return;
+        }
+
+        if (vedioPlayer.superview) {
+            CGRect rectInTableView = [self.tableView rectForRowAtIndexPath:currentIndexPath];
+            CGRect rectInSuperview = [self.tableView convertRect:rectInTableView toView:[self.tableView superview]];
+            if (rectInSuperview.origin.y<-self.currentCell.vedioBg.frame.size.height||rectInSuperview.origin.y>kScreenHeight-kNavbarHeight-kTabBarHeight) {//往上拖动
+
+                if ([[UIApplication sharedApplication].keyWindow.subviews containsObject:vedioPlayer]&&isSmallScreen) {
+                    isSmallScreen = YES;
+                }else{
+                    //放widow上,小屏显示
+                    [self showSmallScreen];
+                }
+
+            }else{
+                if ([self.currentCell.vedioBg.subviews containsObject:vedioPlayer]) {
+
+                }else{
+                    [self showCellCurrentVedioPlayer];
+                }
+            }
+        }
+
+    }
+}
+```
 
 
 ## step 10 : 当滑倒所属当前视频的时候自动播放，切换的时候就是把只之前的Layer移除，然后重新布局，加到KeyWindow中去，代码实现如下：
