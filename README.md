@@ -223,7 +223,50 @@ KYVedioPlayerStateFinished  | 播放完毕
 
 播放器所有点击事件的回调都会通过这个`KYVedioPlayerDelegate`反馈给您的App.
 
-*
+```
+//点击播放暂停按钮代理方法
+-(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer clickedPlayOrPauseButton:(UIButton *)playOrPauseBtn{
+
+    NSLog(@"[KYVedioPlayer] clickedPlayOrPauseButton ");
+}
+//点击关闭按钮代理方法
+-(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer clickedCloseButton:(UIButton *)closeBtn{
+
+    NSLog(@"[KYVedioPlayer] clickedCloseButton ");
+
+}
+//点击全屏按钮代理方法
+-(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer clickedFullScreenButton:(UIButton *)fullScreenBtn{
+    NSLog(@"[KYVedioPlayer] clickedFullScreenButton ");
+
+}
+//单击WMPlayer的代理方法
+-(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer singleTaped:(UITapGestureRecognizer *)singleTap{
+
+    NSLog(@"[KYVedioPlayer] singleTaped ");
+}
+//双击WMPlayer的代理方法
+-(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer doubleTaped:(UITapGestureRecognizer *)doubleTap{
+
+    NSLog(@"[KYVedioPlayer] doubleTaped ");
+}
+
+///播放状态
+//播放失败的代理方法
+-(void)kyvedioPlayerFailedPlay:(KYVedioPlayer *)kyvedioPlayer playerStatus:(KYVedioPlayerState)state{
+    NSLog(@"[KYVedioPlayer] kyvedioPlayerFailedPlay  播放失败");
+}
+//准备播放的代理方法
+-(void)kyvedioPlayerReadyToPlay:(KYVedioPlayer *)kyvedioPlayer playerStatus:(KYVedioPlayerState)state{
+
+    NSLog(@"[KYVedioPlayer] kyvedioPlayerReadyToPlay  准备播放");
+}
+//播放完毕的代理方法
+-(void)kyplayerFinishedPlay:(KYVedioPlayer *)kyvedioPlayer{
+
+    NSLog(@"[KYVedioPlayer] kyvedioPlayerReadyToPlay  播放完毕");
+}
+```
 
 
 ### 更多播放器方法
