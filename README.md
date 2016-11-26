@@ -1182,4 +1182,4 @@ KYVedioPlayer播放器的布局依赖`Masonry`框架，十分感谢`Masonry`开�
 
 # LICENSE
 
-KYAlertView 被许可在 **MIT** 协议下使用。查阅 **LICENSE** 文件来获得更多信息。
+KYVedioPlayer 被许可在 **MIT** 协议下使用。查阅 **LICENSE** 文件来获得更多信息。
