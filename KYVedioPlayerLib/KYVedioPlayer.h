@@ -44,6 +44,8 @@ typedef NS_ENUM(NSInteger, CloseBtnStyle){
 -(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer clickedPlayOrPauseButton:(UIButton *)playOrPauseBtn;
 //点击关闭按钮代理方法
 -(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer clickedCloseButton:(UIButton *)closeBtn;
+//点击分享按钮代理方法
+-(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer onClickShareBtn:(UIButton *)shareBtn;
 //点击全屏按钮代理方法
 -(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer clickedFullScreenButton:(UIButton *)fullScreenBtn;
 //单击WMPlayer的代理方法
@@ -120,6 +122,10 @@ typedef NS_ENUM(NSInteger, CloseBtnStyle){
  *  左上角关闭按钮
  */
 @property (nonatomic,retain ) UIButton       *closeBtn;
+/**
+ *  右上角 分享按钮
+ */
+@property (nonatomic,retain ) UIButton      *shareBtn;
 /**
  *  显示加载失败的UILabel
  */

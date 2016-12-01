@@ -209,6 +209,16 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     _closeBtn.showsTouchWhenHighlighted = YES;
     [_closeBtn addTarget:self action:@selector(colseTheVideo:) forControlEvents:UIControlEventTouchUpInside];
     [self.topView addSubview:_closeBtn];
+    
+    //分享按钮
+    _shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _shareBtn.showsTouchWhenHighlighted = YES;
+    [_shareBtn setImage:[UIImage imageNamed:@"video_share" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"video_share" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [_shareBtn setImage:[UIImage imageNamed:@"video_share_p" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] ?: [UIImage imageNamed:@"video_share" inBundle:MYBUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
+    
+    [_shareBtn addTarget:self action:@selector(onClickShareBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.topView addSubview:_shareBtn];
+
 
     //标题
     self.titleLabel = [[UILabel alloc]init];
@@ -304,6 +314,14 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 
     [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.topView).with.offset(5);
+        make.height.mas_equalTo(30);
+        make.top.equalTo(self.topView).with.offset(5);
+        make.width.mas_equalTo(30);
+
+    }];
+    
+    [self.shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.topView).with.offset(-5);
         make.height.mas_equalTo(30);
         make.top.equalTo(self.topView).with.offset(5);
         make.width.mas_equalTo(30);
@@ -632,6 +650,18 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         [self.delegate kyvedioPlayer:self clickedCloseButton:sender];
     }
 }
+
+#pragma mark - 点击分享按钮
+/**
+  点击分享按钮
+
+ */
+-(void)onClickShareBtn:(UIButton *)sender{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(kyvedioPlayer:onClickShareBtn:)]) {
+        [self.delegate kyvedioPlayer:self onClickShareBtn:sender];
+    }
+}
+
 #pragma mark - 单击播放器 手势方法
 - (void)handleSingleTap:(UITapGestureRecognizer *)sender{
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(autoDismissBottomView:) object:nil];

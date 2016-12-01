@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2A2B888E6C04412F050E31FB /* Pods_KYVedioPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6DDC894D8562A53E1736150 /* Pods_KYVedioPlayer.framework */; };
+		BC1A43D61DEFC80100541F8D /* KYVedioPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BC1A43D51DEFC80100541F8D /* KYVedioPlayer.bundle */; };
 		BC22D6401D826440007F040A /* KYNetworkVideoCellPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D63F1D826440007F040A /* KYNetworkVideoCellPlayVC.m */; };
 		BC22D6431D8264C3007F040A /* KYLocalVideoPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D6421D8264C3007F040A /* KYLocalVideoPlayVC.m */; };
 		BC22D6461D826504007F040A /* KYRememberLastPlayedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BC22D6451D826504007F040A /* KYRememberLastPlayedVC.m */; };
@@ -15,7 +16,6 @@
 		BC27A9111D87E57C00D3B619 /* MBProgressHUD+Show.m in Sources */ = {isa = PBXBuildFile; fileRef = BC27A9101D87E57C00D3B619 /* MBProgressHUD+Show.m */; };
 		BC415DB61DC9BA520059B2C6 /* KYVedioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC415DB51DC9BA520059B2C6 /* KYVedioPlayer.m */; };
 		BC415DC11DCA33B10059B2C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC4CE8881D815D8D00E6475C /* Assets.xcassets */; };
-		BC415DC31DCA387F0059B2C6 /* KYVedioPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BC415DC21DCA387F0059B2C6 /* KYVedioPlayer.bundle */; };
 		BC4CE87B1D815D8D00E6475C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE87A1D815D8D00E6475C /* main.m */; };
 		BC4CE87E1D815D8D00E6475C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE87D1D815D8D00E6475C /* AppDelegate.m */; };
 		BC4CE8811D815D8D00E6475C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4CE8801D815D8D00E6475C /* ViewController.m */; };
@@ -53,6 +53,7 @@
 /* Begin PBXFileReference section */
 		016D9F1098A3EF24734A5535 /* Pods-KYVedioPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KYVedioPlayer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KYVedioPlayer/Pods-KYVedioPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		55849D2107A70892AE30CD96 /* Pods-KYVedioPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KYVedioPlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-KYVedioPlayer/Pods-KYVedioPlayer.release.xcconfig"; sourceTree = "<group>"; };
+		BC1A43D51DEFC80100541F8D /* KYVedioPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = KYVedioPlayer.bundle; sourceTree = "<group>"; };
 		BC22D63E1D826440007F040A /* KYNetworkVideoCellPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYNetworkVideoCellPlayVC.h; sourceTree = "<group>"; };
 		BC22D63F1D826440007F040A /* KYNetworkVideoCellPlayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYNetworkVideoCellPlayVC.m; sourceTree = "<group>"; };
 		BC22D6411D8264C3007F040A /* KYLocalVideoPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYLocalVideoPlayVC.h; sourceTree = "<group>"; };
@@ -67,7 +68,6 @@
 		BC415DB51DC9BA520059B2C6 /* KYVedioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYVedioPlayer.m; sourceTree = "<group>"; };
 		BC415DBB1DCA33A50059B2C6 /* KYVedioPlayer.bundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KYVedioPlayer.bundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC415DBD1DCA33A50059B2C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BC415DC21DCA387F0059B2C6 /* KYVedioPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = KYVedioPlayer.bundle; sourceTree = "<group>"; };
 		BC4CE8761D815D8D00E6475C /* KYVedioPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KYVedioPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC4CE87A1D815D8D00E6475C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BC4CE87C1D815D8D00E6475C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 		BC415DB31DC9BA520059B2C6 /* KYVedioPlayerLib */ = {
 			isa = PBXGroup;
 			children = (
-				BC415DC21DCA387F0059B2C6 /* KYVedioPlayer.bundle */,
+				BC1A43D51DEFC80100541F8D /* KYVedioPlayer.bundle */,
 				BC415DB41DC9BA520059B2C6 /* KYVedioPlayer.h */,
 				BC415DB51DC9BA520059B2C6 /* KYVedioPlayer.m */,
 			);
@@ -431,7 +431,7 @@
 				BC4CE8891D815D8D00E6475C /* Assets.xcassets in Resources */,
 				BC4CE8841D815D8D00E6475C /* Main.storyboard in Resources */,
 				BCD8E9781D84011D00EC2F04 /* 贝加尔湖畔.3gp in Resources */,
-				BC415DC31DCA387F0059B2C6 /* KYVedioPlayer.bundle in Resources */,
+				BC1A43D61DEFC80100541F8D /* KYVedioPlayer.bundle in Resources */,
 				BCD8E9721D83E54D00EC2F04 /* test.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

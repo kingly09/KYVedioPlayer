@@ -364,6 +364,12 @@
     }
 
 }
+//点击分享按钮代理方法
+-(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer onClickShareBtn:(UIButton *)closeBtn{
+  
+  NSLog(@"[KYVedioPlayer] onClickShareBtn ");
+
+}
 //点击全屏按钮代理方法
 -(void)kyvedioPlayer:(KYVedioPlayer *)kyvedioPlayer clickedFullScreenButton:(UIButton *)fullScreenBtn{
     NSLog(@"[KYVedioPlayer] clickedFullScreenButton ");
