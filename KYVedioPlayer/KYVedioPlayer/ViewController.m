@@ -35,6 +35,10 @@
 
 - (void) loadTableView{
     
+    //解决下移的问题
+    UIView *spaceView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
+    [self.view addSubview:spaceView];
+    
     myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) style:UITableViewStylePlain];
     myTableView.dataSource = self;
     myTableView.delegate = self;

@@ -261,6 +261,10 @@
 #pragma  mark - 初始化方法
 - (void)setUpView {
     self.view.backgroundColor = [UIColor whiteColor];
+    //解决下移的问题
+    UIView *spaceView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
+    [self.view addSubview:spaceView];
+    
     self.tableView = ({
         UITableView *tableView	= [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
         tableView.delegate		= self;
@@ -353,11 +357,19 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 0.1;
+    return CGFLOAT_MIN;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0.1;
+    return CGFLOAT_MIN;
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    return nil;
+}
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+     return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

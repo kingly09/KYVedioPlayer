@@ -27,11 +27,18 @@
 #define kStatusBarHeight ([[UIApplication sharedApplication]statusBarFrame].size.height)//状态栏高度
 #define kNavgationBarHeight (64.0f) //NavgationBar的高度
 
+#define kNavbarHeight 44 
+#define kIOS7DELTA   ((kDeviceVersion>=7.0)? 20 :0 )
+//判断iPhoneX  20  44  40
+#define kTabBarHeight ([[UIApplication sharedApplication] statusBarFrame].size.height>40?83:49)//tabBar高
+#define kTopHeight (kStatusBarHeight + kNavBarHeight)//导航栏高
+#define isiPhone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define iPhoneX  [[UIScreen mainScreen] bounds].size.width >= 375.0f && [[UIScreen    mainScreen] bounds].size.height >= 812.0f && isiPhone
+
 #define kDeviceVersion [[UIDevice currentDevice].systemVersion floatValue]
 #define WS(weakSelf) __weak __typeof(&*self)weakSelf = self;
 
-#define kNavbarHeight ((kDeviceVersion>=7.0)? 64 :44 )
-#define kIOS7DELTA   ((kDeviceVersion>=7.0)? 20 :0 )
-#define kTabBarHeight 49
+
+
 
 #endif /* KYVedioPlayer_PrefixHeader_pch */
