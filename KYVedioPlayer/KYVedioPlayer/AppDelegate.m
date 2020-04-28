@@ -14,6 +14,7 @@
 
     ViewController *_viewController;
 }
+
 @end
 
 @implementation AppDelegate
@@ -26,7 +27,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    //设置音频会话
+    // 设置音频会话
     NSError *categoryError = nil;
     NSError *activeError  = nil;
     AVAudioSession *session = [AVAudioSession sharedInstance];
